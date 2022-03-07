@@ -60,6 +60,27 @@ let output=
     System.Console.WriteLine(min_c  n)
     System.Console.WriteLine(max_c  n);;
 *)
+//#14
+(*
+let obhod_del n f init=
+    let rec creat_list n j r=
+        if n<j then r 
+        else 
+            if n % j = 0 then creat_list n (j+1) (j::r)
+            else creat_list n (j+1) r
+    let list= creat_list n 1 []
+    let rec ans list f init =
+        if list = [] then init
+        else 
+            let acc=f init (List.head list)
+            ans (List.tail list) f acc
+    ans list f init
+
+let input=
+    System.Console.WriteLine(obhod_del (System.Convert.ToInt32(System.Console.ReadLine())) (fun x y -> x + y) 0);;
+ *)   
+//#15
+
 
 
     
