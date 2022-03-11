@@ -1,8 +1,6 @@
-﻿//№11
-(*let input=
-    let a = System.Console.ReadLine()
-    if ((a = "Prolog") || (a = "F#" )) then System.Console.WriteLine("Подлиза")
-    else System.Console.WriteLine("Харош");;*)
+﻿open System
+
+
 //#13
 (*
 let mult n=
@@ -79,21 +77,64 @@ let obhod_del n f init=
 let input=
     System.Console.WriteLine(obhod_del (System.Convert.ToInt32(System.Console.ReadLine())) (fun x y -> x + y) 0);;
  *)   
-//#15
+//#18
+//method 1
 
 
+   (* 
+let rec method1 n k init=
+    if n < k then init
+        else 
+            if (n % k) > 0 then method1 n (k+1) init
+            else
+                if (let rec pro_pros j i=
+                    if i=j then 0
+                    else 
+                        if (j % i)>0 then pro_pros j (i+1)
+                        else 1+pro_pros j (i+1)
+                   pro_pros n 2) > 0 then method1 n (k+1) init
+                else  
+                    method1 n (k+1) (init+1)
+        
+        *)
+
+
+
+//let input=
+   // System.Console.WriteLine(method1 (System.Convert.ToInt32(System.Console.ReadLine())) 2 0);;
+           
+            
 
     
 [<EntryPoint>]
-//#12.1 
-(*let main argv =
+//#11 
+(*
+let main argv =
     match System.Console.ReadLine() with
     |"Prolog"->System.Console.WriteLine("Подлиза")
     |"F#"->System.Console.WriteLine("Подлиза")
     | _->System.Console.WriteLine("ХАРОШ")
-    *)
+
+
+
+    
+  *) 
+
+
+
+//#12.1
+
+    
+let main arvg=
+    let a (x:string) = printfn "%s" x
+    let b (x:string) : string = if (x = "Prolog") || (x = "F#") then "Подлиза" else "ХАРОШ"
+    let c = Console.ReadLine() 
+    (b>>a) c 
+    
+     
 //#12.2
 (*let main arvg=
-    System.Console.WriteLine(System.Console.ReadLine() |> (fun x -> if (x = "Prolog")||(x = "F#") then "Подлиза" else "ХАРОШ"))
+    Console.ReadLine() |> (fun x -> if (x = "Prolog")||(x = "F#") then "Подлиза" else "ХАРОШ") |> Console.WriteLine
     *)
+    
     0 // return an integer exit code
