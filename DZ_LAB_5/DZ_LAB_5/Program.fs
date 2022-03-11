@@ -77,6 +77,8 @@ let obhod_del n f init=
 let input=
     System.Console.WriteLine(obhod_del (System.Convert.ToInt32(System.Console.ReadLine())) (fun x y -> x + y) 0);;
  *)   
+ //#15
+
 //#18
 //method 1
 
@@ -98,8 +100,6 @@ let rec method1 n k init=
         
         *)
 
-
-
 //let input=
    // System.Console.WriteLine(method1 (System.Convert.ToInt32(System.Console.ReadLine())) 2 0);;
            
@@ -113,25 +113,17 @@ let main argv =
     match System.Console.ReadLine() with
     |"Prolog"->System.Console.WriteLine("Подлиза")
     |"F#"->System.Console.WriteLine("Подлиза")
-    | _->System.Console.WriteLine("ХАРОШ")
-
-
-
-    
+    | _->System.Console.WriteLine("ХАРОШ") 
   *) 
 
-
-
 //#12.1
-
-    
+(*
 let main arvg=
     let a (x:string) = printfn "%s" x
     let b (x:string) : string = if (x = "Prolog") || (x = "F#") then "Подлиза" else "ХАРОШ"
     let c = Console.ReadLine() 
-    (b>>a) c 
-    
-     
+    (b>>a) c   
+    *)
 //#12.2
 (*let main arvg=
     Console.ReadLine() |> (fun x -> if (x = "Prolog")||(x = "F#") then "Подлиза" else "ХАРОШ") |> Console.WriteLine
