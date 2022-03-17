@@ -2,7 +2,7 @@
 
 
 //#13
-(*
+
 let mult n=
     match n with
     |0->0
@@ -22,18 +22,18 @@ let mult_c_t n=
     mult_c_t1 1 n
 
 let min_c_t n=
-    let rec min_c1 c d max=
+    let rec min_c1 c d min=
         let new_d= c % 10
-        let new_max= if max<new_d then max else new_d
-        if c=0 then max
+        let new_max= if min<new_d then min else new_d
+        if c=0 then min
         else min_c1 (c / 10) new_d new_max
     min_c1 n 0 9
 
-let min_c n=
-    let rec create_list n list=
-       if n = 0 then list 
-       else create_list (n / 10) ((n % 10)::list)
-    List.min (create_list n [])
+let rec min_c n=
+    if n < 10 then n 
+    else let m=min_c (n / 10)
+         if n % 10 < m then (n % 10)
+         else m
         
 let max_c_t n=
     let rec max_c1 c d max=
@@ -43,11 +43,11 @@ let max_c_t n=
         else max_c1 (c / 10) new_d new_max
     max_c1 n 0 0  
      
-let max_c n=
-    let rec create_list n list=
-       if n = 0 then list 
-       else create_list (n / 10) ((n % 10)::list)
-    List.max (create_list n [])
+let rec max_c n=
+    if n < 10 then n
+    else let m = max_c (n / 10)
+         if (n % 10) > m then (n % 10)
+         else m
 
 let output=
     let n=System.Convert.ToInt32(System.Console.ReadLine()) in
@@ -57,7 +57,7 @@ let output=
     System.Console.WriteLine(min_c_t  n)
     System.Console.WriteLine(min_c  n)
     System.Console.WriteLine(max_c  n);;
-*)
+    
 //#14
 (*
 let obhod_del n f init=
@@ -102,10 +102,8 @@ let rec method1 n k init=
 
 //let input=
    // System.Console.WriteLine(method1 (System.Convert.ToInt32(System.Console.ReadLine())) 2 0);;
-           
-            
 
-    
+
 [<EntryPoint>]
 //#11 
 (*
