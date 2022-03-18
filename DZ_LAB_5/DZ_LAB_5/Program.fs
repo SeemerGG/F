@@ -271,12 +271,24 @@ let rec sum_list list sum predicate=
     |h::t -> if predicate h then sum_list t (sum+h) predicate else sum_list t sum predicate
     | _ -> sum
 
+let kol_digit n predicat=
+    let rec kol n acc=
+        if n = 0 then acc
+        else 
+        if predicat (n % 10) then kol (n / 10) (acc + 1) else kol (n / 10) acc
+    kol n 0
+
 let method1 n=
     let list_del= create_del_list n 1 []
     sum_list list_del 0 proverka_on_prost
 
+let method2 n=
+    kol_digit n (fun x -> ((x % 2) > 0) && (x > 3))
+
+
+
 let input=
-   System.Console.WriteLine(method1 (System.Convert.ToInt32(System.Console.ReadLine())));;
+   System.Console.WriteLine(method2 (System.Convert.ToInt32(System.Console.ReadLine())));;
 
 
 [<EntryPoint>]
