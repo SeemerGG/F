@@ -250,7 +250,7 @@ let input=
     System.Console.WriteLine(method3 n 1 1);;
 *)
 //#19
-(*
+
 let kol_del n=
     let rec kol digit i ans=
         if i >= digit then ans 
@@ -298,17 +298,22 @@ let method2 n=
 
 let method3 n=
     mult_list (create_del_list n 1 []) 1 (fun x -> sum_c_t x > sum_c_t n)  
-
+(*
 let input=
     let n = System.Convert.ToInt32(System.Console.ReadLine())
     System.Console.WriteLine(method1 n)
     System.Console.WriteLine(method2 n)
     System.Console.WriteLine(method3 n);;
-*)
+    *)
 
 //#20
-
-
+(*
+let zad20 (n,m)=
+    match n with
+    |1 -> method1 m
+    |2 -> method2 m
+    |3 -> method3 m
+    *)
 [<EntryPoint>]
 //#11 
 (*
@@ -331,5 +336,11 @@ let main arvg=
 (*let main arvg=
     Console.ReadLine() |> (fun x -> if (x = "Prolog")||(x = "F#") then "Подлиза" else "ХАРОШ") |> Console.WriteLine
     *)
-    
+//#20 освободи 19
+(*
+let min arvg=
+    let (n,m) = Console.ReadLine() |> Convert.ToInt32 , Console.ReadLine() |> Convert.ToInt32 
+    let input = (n,m) |> zad20 |> Console.WriteLine
+    let input = (zad20 >> Console.WriteLine ) (n,m)
+    *)
     0 // return an integer exit code
