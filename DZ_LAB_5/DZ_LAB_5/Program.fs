@@ -2,7 +2,7 @@
 
 
 //#13
-
+(*
 let mult n=
     match n with
     |0->0
@@ -57,7 +57,7 @@ let output=
     System.Console.WriteLine(min_c_t  n)
     System.Console.WriteLine(min_c  n)
     System.Console.WriteLine(max_c  n);;
-    
+  *)  
 //#14
 (*
 let obhod_del n f init=
@@ -78,6 +78,33 @@ let input=
     System.Console.WriteLine(obhod_del (System.Convert.ToInt32(System.Console.ReadLine())) (fun x y -> x + y) 0);;
  *)   
  //#15
+let zad15 n f init =
+    let rec create_del_list n j r=
+        if n <= j then r 
+        else 
+            if n % j = 0 then create_del_list n (j+1) (j::r)
+            else create_del_list n (j+1) r
+    let del_list= create_del_list n 2 [] 
+    let rec create_zpd_list n digit zpd_list_next=
+        if digit = n then zpd_list_next
+        else 
+        if  (let rec comparison list acc=
+                match list with
+                |h::t -> if digit % h = 0 then comparison t (acc + 1)
+                            else comparison t acc
+                |[] -> acc
+             comparison del_list 0) > 0 then create_zpd_list n (digit + 1) zpd_list_next
+        else  create_zpd_list n (digit + 1) (digit::zpd_list_next)
+    let zpd_list = create_zpd_list n 2 []
+    let rec zad list i=
+        match list with
+        |h::t -> let acc = f h i
+                 zad t acc
+        |[] -> i
+    zad zpd_list init 
+
+let input=
+    System.Console.WriteLine(zad15 (System.Convert.ToInt32(System.Console.ReadLine())) (fun x y -> x + y) 0);;
 
 //#18
 //method 1

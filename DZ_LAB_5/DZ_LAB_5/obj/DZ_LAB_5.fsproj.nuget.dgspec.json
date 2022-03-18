@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PcBoyarin\\OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet\\Practical\\ФиЛП\\F\\DZ_LAB_5\\DZ_LAB_5\\DZ_LAB_5.fsproj": {}
+    "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\DZ_LAB_5\\DZ_LAB_5\\DZ_LAB_5.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\PcBoyarin\\OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet\\Practical\\ФиЛП\\F\\DZ_LAB_5\\DZ_LAB_5\\DZ_LAB_5.fsproj": {
+    "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\DZ_LAB_5\\DZ_LAB_5\\DZ_LAB_5.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PcBoyarin\\OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet\\Practical\\ФиЛП\\F\\DZ_LAB_5\\DZ_LAB_5\\DZ_LAB_5.fsproj",
+        "projectUniqueName": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\DZ_LAB_5\\DZ_LAB_5\\DZ_LAB_5.fsproj",
         "projectName": "DZ_LAB_5",
-        "projectPath": "C:\\Users\\PcBoyarin\\OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet\\Practical\\ФиЛП\\F\\DZ_LAB_5\\DZ_LAB_5\\DZ_LAB_5.fsproj",
+        "projectPath": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\DZ_LAB_5\\DZ_LAB_5\\DZ_LAB_5.fsproj",
         "packagesPath": "C:\\Users\\PcBoyarin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PcBoyarin\\OneDrive - FGBOU VO Kubanskiy Gosudarstvennyi Universitet\\Practical\\ФиЛП\\F\\DZ_LAB_5\\DZ_LAB_5\\obj\\",
+        "outputPath": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\DZ_LAB_5\\DZ_LAB_5\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PcBoyarin\\AppData\\Roaming\\NuGet\\NuGet.Config",
