@@ -154,7 +154,7 @@ let input_16 =
     System.Console.WriteLine(zad16_2  n m);;
     *)
 //#17
-
+(*
 let obhod_del n f init predicat=
     let rec creat_list n j r=
         if (n<j)  then r 
@@ -199,9 +199,29 @@ let input =
     let n =System.Convert.ToInt32(System.Console.ReadLine())
     System.Console.WriteLine(obhod_del n (fun x y -> x + y) 0 (fun x -> x % 3 = 0))
     System.Console.WriteLine(obhod_zpd n (fun x y -> x + y) 0 (fun x -> x % 5 = 0))
-    
+    *)
 //#18
+
 //method 1
+let obhod_del n=
+    let rec creat_list n j r=
+        if n < j then r 
+        else 
+            if (n % j = 0) && ((let rec prost digit i ans=
+                                   if i >= digit then ans 
+                                   else if digit % i = 0 then prost digit (i+1) (ans + 1) else prost digit (i + 1) ans
+                                prost j 2 0 ) = 0)   
+            then  creat_list n (j+1) (j::r)
+            else creat_list n (j+1) r
+    let list= creat_list n 1 []
+    let rec ans list init =
+        match list with
+        |h::t -> ans t (init + h) 
+        |[] -> init
+    ans list 0
+
+let input=
+    System.Console.WriteLine(obhod_del (System.Convert.ToInt32(System.Console.ReadLine())));;
 
 
    (* 
