@@ -210,8 +210,7 @@ let obhod_del n=
             if (n % j = 0) && ((let rec prost digit i ans=
                                    if i >= digit then ans 
                                    else if digit % i = 0 then prost digit (i+1) (ans + 1) else prost digit (i + 1) ans
-                                prost j 2 0 ) = 0)   
-            then  creat_list n (j+1) (j::r)
+                                prost j 2 0 ) = 0) then  creat_list n (j+1) (j::r)
             else creat_list n (j+1) r
     let list= creat_list n 1 []
     let rec ans list init =
@@ -220,9 +219,18 @@ let obhod_del n=
         |[] -> init
     ans list 0
 
-let input=
-    System.Console.WriteLine(obhod_del (System.Convert.ToInt32(System.Console.ReadLine())));;
+//method 2
+let method3 n =
+    let rec obhod n acc=
+        if n <= 0 then acc else
+        if ((n % 10) > 3) && ((n % 10) % 2 > 0) then obhod (n / 10) (acc + 1)
+        else obhod (n / 10) acc
+    obhod n 0
 
+let input=
+    let n = System.Convert.ToInt32(System.Console.ReadLine())
+    System.Console.WriteLine(obhod_del n)
+    System.Console.WriteLine(method3 n);;
 
    (* 
 let rec method1 n k init=
