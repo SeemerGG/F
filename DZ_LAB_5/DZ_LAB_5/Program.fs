@@ -201,7 +201,7 @@ let input =
     System.Console.WriteLine(obhod_zpd n (fun x y -> x + y) 0 (fun x -> x % 5 = 0))
     *)
 //#18
-
+(*
 //method 1
 let obhod_del n=
     let rec creat_list n j r=
@@ -220,18 +220,35 @@ let obhod_del n=
     ans list 0
 
 //method 2
-let method3 n =
+let method2 n =
     let rec obhod n acc=
         if n <= 0 then acc else
         if ((n % 10) > 3) && ((n % 10) % 2 > 0) then obhod (n / 10) (acc + 1)
         else obhod (n / 10) acc
     obhod n 0
 
+//method 3
+let sum_c_t n=
+    let rec sum_c_t1 acc n=
+        if n = 0 then acc
+        else sum_c_t1 (acc + (n % 10)) (n / 10)
+    sum_c_t1 0 n
+
+let rec method3 n j kol=
+    if n < j then kol 
+        else 
+        if (n % j = 0) && (sum_c_t n > sum_c_t j) then method3 n (j+1) (kol * j) 
+        else method3 n (j+1) kol
+
+
+
+
 let input=
     let n = System.Convert.ToInt32(System.Console.ReadLine())
     System.Console.WriteLine(obhod_del n)
-    System.Console.WriteLine(method3 n);;
-
+    System.Console.WriteLine(method2 n)
+    System.Console.WriteLine(method3 n 1 1);;
+*)
    (* 
 let rec method1 n k init=
     if n < k then init
