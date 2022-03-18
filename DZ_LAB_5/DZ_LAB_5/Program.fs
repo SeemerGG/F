@@ -250,7 +250,7 @@ let input=
     System.Console.WriteLine(method3 n 1 1);;
 *)
 //#19
-//method1
+(*
 let kol_del n=
     let rec kol digit i ans=
         if i >= digit then ans 
@@ -271,6 +271,17 @@ let rec sum_list list sum predicate=
     |h::t -> if predicate h then sum_list t (sum+h) predicate else sum_list t sum predicate
     | _ -> sum
 
+let rec mult_list list mul predicate=
+    match list with
+    |h::t -> if predicate h then mult_list t (mul * h) predicate else mult_list t mul predicate
+    | _ -> mul
+
+let sum_c_t n=
+    let rec sum_c_t1 acc n=
+        if n = 0 then acc
+        else sum_c_t1 (acc + (n % 10)) (n / 10)
+    sum_c_t1 0 n
+
 let kol_digit n predicat=
     let rec kol n acc=
         if n = 0 then acc
@@ -285,10 +296,17 @@ let method1 n=
 let method2 n=
     kol_digit n (fun x -> ((x % 2) > 0) && (x > 3))
 
-
+let method3 n=
+    mult_list (create_del_list n 1 []) 1 (fun x -> sum_c_t x > sum_c_t n)  
 
 let input=
-   System.Console.WriteLine(method2 (System.Convert.ToInt32(System.Console.ReadLine())));;
+    let n = System.Convert.ToInt32(System.Console.ReadLine())
+    System.Console.WriteLine(method1 n)
+    System.Console.WriteLine(method2 n)
+    System.Console.WriteLine(method3 n);;
+*)
+
+//#20
 
 
 [<EntryPoint>]
