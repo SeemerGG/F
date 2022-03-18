@@ -249,25 +249,34 @@ let input=
     System.Console.WriteLine(method2 n)
     System.Console.WriteLine(method3 n 1 1);;
 *)
-   (* 
-let rec method1 n k init=
-    if n < k then init
-        else 
-            if (n % k) > 0 then method1 n (k+1) init
-            else
-                if (let rec pro_pros j i=
-                    if i=j then 0
-                    else 
-                        if (j % i)>0 then pro_pros j (i+1)
-                        else 1+pro_pros j (i+1)
-                   pro_pros n 2) > 0 then method1 n (k+1) init
-                else  
-                    method1 n (k+1) (init+1)
-        
-        *)
+//#19
+//method1
+let kol_del n=
+    let rec kol digit i ans=
+        if i >= digit then ans 
+        else if digit % i = 0 then kol digit (i+1) (ans + 1) else kol digit (i + 1) ans
+    kol n 2 0
 
-//let input=
-   // System.Console.WriteLine(method1 (System.Convert.ToInt32(System.Console.ReadLine())) 2 0);;
+let proverka_on_prost digit=
+    if kol_del digit > 0 then false else true
+
+let rec create_del_list n j r=
+    if n < j then r 
+    else 
+        if n % j = 0 then create_del_list n (j+1) (j::r)
+        else create_del_list n (j+1) r
+
+let rec sum_list list sum predicate=
+    match list with
+    |h::t -> if predicate h then sum_list t (sum+h) predicate else sum_list t sum predicate
+    | _ -> sum
+
+let method1 n=
+    let list_del= create_del_list n 1 []
+    sum_list list_del 0 proverka_on_prost
+
+let input=
+   System.Console.WriteLine(method1 (System.Convert.ToInt32(System.Console.ReadLine())));;
 
 
 [<EntryPoint>]
