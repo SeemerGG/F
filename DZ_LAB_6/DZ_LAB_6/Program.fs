@@ -53,6 +53,7 @@ let rec swap list x y new_list=
     |h::t -> if h = x  then swap t x y (y::new_list) else if h = y then swap t x y (x::new_list) else swap t x y (h::new_list)
     |[] -> flip new_list []
 
+
 let zad11 list =
     let elem1 = List.head list
     let elem2 = diffrent_elem (fun x -> x <> elem1) list
@@ -65,11 +66,20 @@ let zad17 list =
     let min = min_elem list
     swap list min max []
 
-
+let zad19 list =
+    let head = List.head list
+    let rec shift list new_list=
+        match list with
+        |h::t -> shift t (h::new_list)
+        |[] -> flip (head::new_list) []
+    shift (List.tail list) []
+ 
+    
 [<EntryPoint>]
 let main argv =
     let list = read_list 
     match Console.ReadLine() with
     |"11" -> zad11 <| list
     |"17" -> list |> zad17 |> output_list |> ignore
+    |"19" -> list |> zad19 |> output_list |> ignore
     0 // return an integer exit code
