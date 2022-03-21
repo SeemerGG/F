@@ -53,7 +53,6 @@ let rec swap list x y new_list=
     |h::t -> if h = x  then swap t x y (y::new_list) else if h = y then swap t x y (x::new_list) else swap t x y (h::new_list)
     |[] -> flip new_list []
 
-
 let zad11 list =
     let elem1 = List.head list
     let elem2 = diffrent_elem (fun x -> x <> elem1) list
@@ -73,7 +72,14 @@ let zad19 list =
         |h::t -> shift t (h::new_list)
         |[] -> flip (head::new_list) []
     shift (List.tail list) []
- 
+
+let zad31 list =
+    count (fun x -> x % 2 = 0) list 0
+
+let zad34 list =
+    let a = Convert.ToInt32(Console.ReadLine())
+    let b = Convert.ToInt32(Console.ReadLine())
+    count (fun x -> (x < b) && (x > a)) list 0  
     
 [<EntryPoint>]
 let main argv =
@@ -82,4 +88,6 @@ let main argv =
     |"11" -> zad11 <| list
     |"17" -> list |> zad17 |> output_list |> ignore
     |"19" -> list |> zad19 |> output_list |> ignore
+    |"31" -> list |> zad31 |> Console.WriteLine
+    |"34" -> list |> zad34 |> Console.WriteLine
     0 // return an integer exit code
