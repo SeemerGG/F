@@ -307,13 +307,13 @@ let input=
     *)
 
 //#20
-(*
-let zad20 (n,m)=
+
+let zad20 n=
     match n with
-    |1 -> method1 m
-    |2 -> method2 m
-    |3 -> method3 m
-    *)
+    |1 -> method1 
+    |2 -> method2 
+    |3 -> method3 
+    
 [<EntryPoint>]
 //#11 
 (*
@@ -337,10 +337,10 @@ let main arvg=
     Console.ReadLine() |> (fun x -> if (x = "Prolog")||(x = "F#") then "Подлиза" else "ХАРОШ") |> Console.WriteLine
     *)
 //#20 освободи 19
-(*
+
 let min arvg=
     let (n,m) = Console.ReadLine() |> Convert.ToInt32 , Console.ReadLine() |> Convert.ToInt32 
-    let input = (n,m) |> zad20 |> Console.WriteLine
-    let input = (zad20 >> Console.WriteLine ) (n,m)
-    *)
+    let input = m|> (n |> zad20) |> Console.WriteLine
+    let input = (zad20 n >> Console.WriteLine) m 
+    
     0 // return an integer exit code
