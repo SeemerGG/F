@@ -9,10 +9,6 @@ let rec input_list n=
         let tail = input_list (n - 1)
         head::tail
 
-let read_list =
-    let n = Convert.ToInt32(Console.ReadLine())
-    input_list n
-
 let rec output_list (list:int list) =
     match list with
     |[] -> None
@@ -29,20 +25,11 @@ let rec diffrent_elem f list =
     |h::t -> if f h then h else diffrent_elem f t 
     |[] -> 0
 
-let min_elem list =
-    let rec min list acc=
-        match list with
-        |h::t -> if h < acc then min t h else min t acc
-        |[] -> acc
-    min list (List.head list)
-
-let max_elem list =
-    let rec max list acc=
-        match list with
-        |h::t -> if h > acc then max t h else max t acc
-        |[] -> acc
-    max list (List.head list)
-
+let rec universal f list acc=
+    match list with
+    |h::t -> universal f t (f h acc)
+    |[] -> acc
+    
 let rec flip list newlist=
     match list with 
     |h::t -> flip t (h::newlist)
@@ -57,6 +44,21 @@ let rec i_list f list (counter:int) new_list =
     match list with
     |h::t -> if t <> [] then (if f h t then i_list f t (counter + 1) ((counter + 1)::new_list) else i_list f t (counter + 1) new_list) else new_list 
     |[] -> new_list
+ 
+let rec bypass f list =
+    match list with
+    |h::t -> if f h then bypass f t else false
+    |[] -> true
+
+let rec symmetric_different list1 list2 new_list =
+    match list1 with
+    |h::t -> if (bypass (fun x -> x <> h) list2) then symmetric_different t list2 (h::new_list) else symmetric_different t list2 new_list
+    |[] -> new_list
+
+let rec delete_clon list list2 new_list =
+    match list with 
+    |h::t -> if count (fun x y-> x = h) list2 0 = 1 then delete_clon t list2 (h::new_list) else delete_clon t list2 new_list
+    |[] -> new_list
 
 let zad11 list =
     let elem1 = List.head list
@@ -66,8 +68,8 @@ let zad11 list =
     if acc1 > acc2 then Console.WriteLine("Элемент встречаемый единожды {0}", elem2) else Console.WriteLine("Элемент встречаемый единожды {0}", elem1) 
 
 let zad17 list =
-    let max = max_elem list
-    let min = min_elem list
+    let max = universal (fun x y -> if x > y then x else y) list (List.head list)
+    let min = universal (fun x y -> if x < y then x else y) list (List.head list)
     swap list min max []
 
 let zad19 list =
@@ -91,14 +93,23 @@ let zad37 list =
     list_position |> output_list |> ignore
     Console.WriteLine("\nКоличество таких элементов:{0}",count (fun x y -> true) list_position 0)
     
+let zad50 (list1,list2:int list) =
+    let list_1 = delete_clon list1 list1 []
+    let list_2 = delete_clon list2 list2 []
+    (symmetric_different list_1 list_2 []) @ (symmetric_different list_2 list_1 [])
+
 [<EntryPoint>]
 let main argv =
-    let list = read_list 
+    let n = Convert.ToInt32(Console.ReadLine())
+    let list = input_list n
     match Console.ReadLine() with
     |"11" -> zad11 <| list
     |"17" -> list |> zad17 |> output_list |> ignore
     |"19" -> list |> zad19 |> output_list |> ignore
     |"31" -> list |> zad31 |> Console.WriteLine
     |"34" -> list |> zad34 |> Console.WriteLine
-    |"37" -> list |> zad37 
+    |"37" -> list |> zad37
+    |"50" -> let m = Convert.ToInt32(Console.ReadLine()) 
+             let list2 = input_list m
+             (list,list2) |> zad50 |> output_list |> ignore 
     0 // return an integer exit code
