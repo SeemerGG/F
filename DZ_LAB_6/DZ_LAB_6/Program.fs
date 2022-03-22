@@ -21,7 +21,7 @@ let rec output_list (list:int list) =
 
 let rec count f list acc =
     match list with 
-    |h::t -> if f h then count f t (acc + 1) else count f t acc
+    |h::t -> if f h t then count f t (acc + 1) else count f t acc
     |[] -> acc
 
 let rec diffrent_elem f list =
@@ -48,16 +48,21 @@ let rec flip list newlist=
     |h::t -> flip t (h::newlist)
     |[] -> newlist
 
-let rec swap list x y new_list=
+let rec swap list x y new_list =
     match list with
     |h::t -> if h = x  then swap t x y (y::new_list) else if h = y then swap t x y (x::new_list) else swap t x y (h::new_list)
     |[] -> flip new_list []
 
+let rec i_list f list (counter:int) new_list =
+    match list with
+    |h::t -> if t <> [] then (if f h t then i_list f t (counter + 1) ((counter + 1)::new_list) else i_list f t (counter + 1) new_list) else new_list 
+    |[] -> new_list
+
 let zad11 list =
     let elem1 = List.head list
     let elem2 = diffrent_elem (fun x -> x <> elem1) list
-    let acc1 = count (fun x -> x = elem1)  list 0
-    let acc2 = count (fun x -> x = elem2) list 0
+    let acc1 = count (fun x y -> x = elem1)  list 0
+    let acc2 = count (fun x y -> x = elem2) list 0
     if acc1 > acc2 then Console.WriteLine("Элемент встречаемый единожды {0}", elem2) else Console.WriteLine("Элемент встречаемый единожды {0}", elem1) 
 
 let zad17 list =
@@ -74,12 +79,17 @@ let zad19 list =
     shift (List.tail list) []
 
 let zad31 list =
-    count (fun x -> x % 2 = 0) list 0
+    count (fun x y -> x % 2 = 0) list 0
 
 let zad34 list =
     let a = Convert.ToInt32(Console.ReadLine())
     let b = Convert.ToInt32(Console.ReadLine())
-    count (fun x -> (x < b) && (x > a)) list 0  
+    count (fun x y -> (x < b) && (x > a)) list 0  
+  
+let zad37 list =
+    let list_position = i_list (fun x y -> x > List.head y) list 0 []
+    list_position |> output_list |> ignore
+    Console.WriteLine("\nКоличество таких элементов:{0}",count (fun x y -> true) list_position 0)
     
 [<EntryPoint>]
 let main argv =
@@ -90,4 +100,5 @@ let main argv =
     |"19" -> list |> zad19 |> output_list |> ignore
     |"31" -> list |> zad31 |> Console.WriteLine
     |"34" -> list |> zad34 |> Console.WriteLine
+    |"37" -> list |> zad37 
     0 // return an integer exit code
