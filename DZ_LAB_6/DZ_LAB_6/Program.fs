@@ -98,6 +98,17 @@ let zad50 (list1,list2:int list) =
     let list_2 = delete_clon list2 list2 []
     (symmetric_different list_1 list_2 []) @ (symmetric_different list_2 list_1 [])
 
+let zad11_1 f (list:int list) =
+    let rec zad (list:int list) new_list =
+        match list with
+        |h::t -> if t <> [] then
+                    if List.tail t <> [] then zad t ((f h (List.head t) (List.head (List.tail t)))::new_list) else zad t ((f h (List.head t) 1)::new_list)
+                 else zad t ((f h 1 1)::new_list)
+        |[] -> new_list
+    zad list []
+
+
+
 [<EntryPoint>]
 let main argv =
     let n = Convert.ToInt32(Console.ReadLine())
@@ -112,4 +123,5 @@ let main argv =
     |"50" -> let m = Convert.ToInt32(Console.ReadLine()) 
              let list2 = input_list m
              (list,list2) |> zad50 |> output_list |> ignore 
+    |"#11" -> (zad11_1 (fun x y z -> x + y + z) list) |> output_list |> ignore
     0 // return an integer exit code
