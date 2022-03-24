@@ -132,6 +132,11 @@ let rec delete_i list new_list counter i =
     |h::t -> if counter = i then delete_i t new_list (counter + 1) i else delete_i t (h::new_list) (counter + 1) i
     |[] -> flip new_list []
 
+let rec item list i counter =
+    match list with
+    |h::t -> if i = counter then h else item t i (counter + 1)
+    |[] -> 0
+
 let zad55 list=
     let list_no_clon = delete_repeats list [] //лист без повторов
     let list_with_frequency = list_count list_no_clon list [] //лист частот итых элементов 
@@ -141,9 +146,9 @@ let zad55 list=
         | _  ->  let i, max = universal_and_i (fun x y -> x > y) list_frequency (List.head list_frequency) 0 0
                  let list1 = delete_i list_no_clone [] 0 i
                  let list2 = delete_i list_frequency [] 0 i
-                 let list3 = add_elem new_list (List.item i list_no_clone) max
+                 let list3 = add_elem new_list (item list_no_clone i 0) max
                  zad list1 list2 list3 (counter - 1)
-    flip (zad list_no_clon list_with_frequency [] (List.length list_no_clon)) []
+    flip (zad list_no_clon list_with_frequency [] (count (fun x y-> true) list_no_clon 0)) []
                 
 
 
