@@ -25,12 +25,12 @@ let rec diffrent_elem f list =
     |h::t -> if f h then h else diffrent_elem f t 
     |[] -> 0
 
-let rec universal f list acc=
+let rec universal f list acc =
     match list with
     |h::t -> universal f t (f h acc)
     |[] -> acc
     
-let rec flip list newlist=
+let rec flip list (newlist:int list)=
     match list with 
     |h::t -> flip t (h::newlist)
     |[] -> newlist
@@ -58,6 +58,11 @@ let rec symmetric_different list1 list2 new_list =
 let rec delete_clon list list2 new_list =
     match list with 
     |h::t -> if count (fun x y-> x = h) list2 0 = 1 then delete_clon t list2 (h::new_list) else delete_clon t list2 new_list
+    |[] -> new_list
+
+let rec delete_repeats list new_list =
+    match list with
+    |h::t -> if bypass (fun x -> x <> h) new_list then delete_repeats t (h::new_list) else delete_repeats t new_list
     |[] -> new_list
 
 let zad11 list =
@@ -107,6 +112,39 @@ let zad11_1 f (list:int list) =
         |[] -> new_list
     zad list []
 
+let rec add_elem new_list elem (counter:int)= 
+    match counter with
+    |0 -> new_list
+    | _ -> add_elem (elem::new_list) elem (counter - 1)
+    
+let rec universal_and_i f list acc i counter = // возвращает кортеж из номера элемента в списке и его значения 
+    match list with
+    |h::t -> if f h acc then universal_and_i f t h counter (counter + 1) else universal_and_i f t acc i (counter + 1)
+    |[] -> (i, acc)
+
+let rec list_count list1 list2 new_list = //сколько раз итый элемент встречаеться в лист2
+    match list1 with
+    |h::t -> list_count t list2 ((count (fun x y-> x = h) list2 0)::new_list) 
+    |[] -> flip new_list []
+
+let rec delete_i list new_list counter i =
+    match list with
+    |h::t -> if counter = i then delete_i t new_list (counter + 1) i else delete_i t (h::new_list) (counter + 1) i
+    |[] -> flip new_list []
+
+let zad55 list=
+    let list_no_clon = delete_repeats list [] //лист без повторов
+    let list_with_frequency = list_count list_no_clon list [] //лист частот итых элементов 
+    let rec zad list_no_clone list_frequency new_list (counter:int)=
+        match counter with
+        | 0 -> new_list
+        | _  ->  let i, max = universal_and_i (fun x y -> x > y) list_frequency (List.head list_frequency) 0 0
+                 let list1 = delete_i list_no_clone [] 0 i
+                 let list2 = delete_i list_frequency [] 0 i
+                 let list3 = add_elem new_list (List.item i list_no_clone) max
+                 zad list1 list2 list3 (counter - 1)
+    flip (zad list_no_clon list_with_frequency [] (List.length list_no_clon)) []
+                
 
 
 [<EntryPoint>]
@@ -124,4 +162,5 @@ let main argv =
              let list2 = input_list m
              (list,list2) |> zad50 |> output_list |> ignore 
     |"#11" -> (zad11_1 (fun x y z -> x + y + z) list) |> output_list |> ignore
+    |"55" -> list |> zad55 |> output_list |> ignore
     0 // return an integer exit code
