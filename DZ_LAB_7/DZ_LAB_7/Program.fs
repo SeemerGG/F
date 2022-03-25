@@ -20,6 +20,12 @@ let zad17 (list:int list) =
     let max = List.max list
     List.map (fun x -> if x = max then min else if x = min then max else x) list
 
+let zad27 (list:int list) =
+    (List.last list::List.removeAt (List.length list - 1) list)
+   
+let zad37 (list:int list) =
+    List.mapi2 (fun i x y -> if x > y then Console.Write("{0} ",i)) list list
+    Console.WriteLine("Количество элементов:{0}",List.length list)
 
 [<EntryPoint>]
 let main argv =
@@ -27,4 +33,5 @@ let main argv =
     match Console.ReadLine() with
     |"17" -> list |> zad17 |> output_list |> ignore
     |"27" -> list |> zad27 |> output_list |> ignore
+    |"37" -> list |> zad37
     0 // return an integer exit code

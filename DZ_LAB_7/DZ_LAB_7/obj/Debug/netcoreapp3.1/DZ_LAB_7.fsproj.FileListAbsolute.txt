@@ -24,3 +24,4 @@ C:\Users\PcBoyarin\Desktop\FaLP_Lab\DZ_LAB_7\DZ_LAB_7\bin\Debug\netcoreapp3.1\zh
 C:\Users\PcBoyarin\Desktop\FaLP_Lab\DZ_LAB_7\DZ_LAB_7\obj\Debug\netcoreapp3.1\DZ_LAB_7.dll
 C:\Users\PcBoyarin\Desktop\FaLP_Lab\DZ_LAB_7\DZ_LAB_7\obj\Debug\netcoreapp3.1\DZ_LAB_7.pdb
 C:\Users\PcBoyarin\Desktop\FaLP_Lab\DZ_LAB_7\DZ_LAB_7\obj\Debug\netcoreapp3.1\DZ_LAB_7.genruntimeconfig.cache
+C:\Users\PcBoyarin\Desktop\FaLP_Lab\DZ_LAB_7\DZ_LAB_7\obj\Debug\netcoreapp3.1\DZ_LAB_7.fsproj.CopyComplete
