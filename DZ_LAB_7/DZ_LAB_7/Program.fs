@@ -22,10 +22,26 @@ let zad17 (list:int list) =
 
 let zad27 (list:int list) =
     (List.last list::List.removeAt (List.length list - 1) list)
-   
+  
 let zad37 (list:int list) =
-    List.mapi2 (fun i x y -> if x > y then Console.Write("{0} ",i)) list list
-    Console.WriteLine("Количество элементов:{0}",List.length list)
+    let list_indexed = List.indexed list 
+    let new_list = List.filter (fun x -> snd x < List.item (fst x - 1) list) (List.tail list_indexed)
+    List.iter (fun x -> printfn "%i" (fst x) ) new_list
+    Console.WriteLine(List.fold (fun s x -> s+1 ) 0 new_list)
+ 
+let rec search_del n i (new_list:int list) =
+    if n < i then new_list
+    else (if n % i = 0 then search_del n (i+1) (i::new_list) else search_del n (i+1) new_list)
+    
+
+let zad47 (list:int list) =
+    let distinct_list = List.distinct list
+    List.distinct (List.fold (fun s x -> s @ search_del x 1 []) [] distinct_list)
+
+    
+let zad57 list =
+    let i_list = List.indexed list
+    List.fold (fun s x -> if ((List.fold (fun sum b -> snd b + s) 0 (List.takeWhile (fun y -> fst y < fst x) i_list))) < snd x then s + 1 else s) 0 i_list
 
 [<EntryPoint>]
 let main argv =
@@ -34,4 +50,6 @@ let main argv =
     |"17" -> list |> zad17 |> output_list |> ignore
     |"27" -> list |> zad27 |> output_list |> ignore
     |"37" -> list |> zad37
-    0 // return an integer exit code
+    |"47" -> list |> zad47 |> output_list |> ignore
+    |"57" -> list |> zad57 |> Console.WriteLine
+    0 
