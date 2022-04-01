@@ -43,6 +43,7 @@ let zad57 list =
     let i_list = List.indexed list
     List.fold (fun s x -> if ((List.fold (fun sum b -> snd b + s) 0 (List.takeWhile (fun y -> fst y < fst x) i_list))) < snd x then s + 1 else s) 0 i_list
 
+
 [<EntryPoint>]
 let main argv =
     let list = input_list (Convert.ToInt32(Console.ReadLine()))
