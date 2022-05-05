@@ -71,3 +71,7 @@ mul_digit(X):-mul_digit(X,Y),write(Y),!.
 mul_digit_down(X,Y):-X<10,Y is X mod 10.
 mul_digit_down(X,Y):-NewX is X div 10,NewY is Y * (X mod 10),mul_digit(NewX,NewY).
 mul_digit_down(X):-mul_digit(X,Y),write(Y),!.
+%Задание 17
+search_no_chet(X,Y):-X<10,AnsX is X mod 10,(AnsX mod 2 =:= 0,AnsX>3 -> Y is 1;Y is 0).
+search_no_chet(X,Y):-NewX is X div 10,search_no_chet(NewX,Y1),AnsX is X mod 10,(AnsX mod 2 =:= 0,AnsX>3 -> Y is Y1+1;Y is Y1).
+search_no_chet(X):-search_no_chet(X,Y),write(Y),!.
