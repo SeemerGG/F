@@ -67,11 +67,29 @@ grand_mom_son(X,Y):-(man(X),woman(Y),parent(Y,U),parent(U,X);man(Y),woman(X),par
 mul_digit(X,Y):-X<10,Y is X mod 10,!.
 mul_digit(X,Y):-NewX is X div 10,mul_digit(NewX,Y1),Y is (X mod 10)*Y1,!.
 mul_digit(X):-mul_digit(X,Y),write(Y),!.
+
 %Задание 16
 mul_digit_down(X,Y):-X<10,Y is X mod 10.
 mul_digit_down(X,Y):-NewX is X div 10,NewY is Y * (X mod 10),mul_digit(NewX,NewY).
 mul_digit_down(X):-mul_digit(X,Y),write(Y),!.
 %Задание 17
+
 search_no_chet(X,Y):-X<10,AnsX is X mod 10,(AnsX mod 2 =:= 0,AnsX>3 -> Y is 1;Y is 0).
 search_no_chet(X,Y):-NewX is X div 10,search_no_chet(NewX,Y1),AnsX is X mod 10,(AnsX mod 2 =:= 0,AnsX>3 -> Y is Y1+1;Y is Y1).
 search_no_chet(X):-search_no_chet(X,Y),write(Y),!.
+%Задание 18
+
+search_no_chet_down(X):-search_no_chet_down(X,0),!.
+search_no_chet_down(0,Y):-write(Y),!.
+search_no_chet_down(X,Y):-NewX is X div 10,AnsX is X mod 10,(AnsX mod 2 =:= 0,AnsX>3 -> NewN is Y+1;NewN is Y),search_no_chet_down(NewX,NewN).
+
+%Задание 19
+
+bibonachi(1,1):-!.
+bibonachi(2,1):-!.
+bibonachi(N, X):- N1 is N - 1, N2 is N - 2, bibonachi(N1, X1), bibonachi(N2, X2), X is X1 + X2.
+%Задание 20
+
+fib(N,X):-fib(1,1,2,N,X).
+fib(_,F,N,N,F):-!.
+fib(A,B,K,N,X):-C is A+B, K1 is K+1,fib(B,C,K1,N,X).
