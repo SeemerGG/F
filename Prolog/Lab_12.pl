@@ -27,3 +27,11 @@ zad13(A,N,B,M,Count,K):-X is A**B,NewB is B+1,(srav(X,A,NewB,N,M) -> NewCount is
 srav(_,N,_,N,_):-!.
 srav(X,A,M,N,M):-NewA is A+1,srav(X,NewA,2,N,M).
 srav(X,A,B,N,M):-(A<N,B<M -> (X2 is A**B,X =:= X2 -> fail,!;NewB is B+1,srav(X,A,NewB,N,M))).
+
+%Задание 14
+
+lenght_list([],0).
+lenght_list([_|T],X):-lenght_list(T,X1),X is X1+1.
+
+%Задание 15
+

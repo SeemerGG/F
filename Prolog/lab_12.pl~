@@ -23,7 +23,12 @@ mult_del(N,Y,TM,M):-N mod Y =:= 0,sum_digit(Y,X),sum_digit(N,U),X<U->NewY is Y+1
 zad13(N,M,K):-NewN is N+1,NewM is M+1,zad13(2,NewN,2,NewM,0,K),!.
 zad13(N,N,_,_,Count,Count):-!.
 zad13(A,N,M,M,Count,K):-NewA is A+1,zad13(NewA,N,2,M,Count,K).
-zad13(A,N,B,M,Count,K):-X is A**B,NewB is B+1,(srav(X,A,NewB,N,M) -> NewCount is Count+1,write(X),nl,zad13(A,N,NewB,M,NewCount,K);zad13(A,N,NewB,M,Count,K)).
+zad13(A,N,B,M,Count,K):-X is A**B,NewB is B+1,(srav(X,A,NewB,N,M) -> NewCount is Count+1,zad13(A,N,NewB,M,NewCount,K);zad13(A,N,NewB,M,Count,K)).
 srav(_,N,_,N,_):-!.
 srav(X,A,M,N,M):-NewA is A+1,srav(X,NewA,2,N,M).
 srav(X,A,B,N,M):-(A<N,B<M -> (X2 is A**B,X =:= X2 -> fail,!;NewB is B+1,srav(X,A,NewB,N,M))).
+
+%Задание 14
+
+lenght_list([],0).
+lenght_list([_|T],X):-lenght_list(T,X1),X is X1+1.
