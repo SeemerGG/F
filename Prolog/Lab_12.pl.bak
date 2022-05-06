@@ -1,0 +1,10 @@
+%Задание 11
+simple_digit(N):-simple_digit(N,2),!.
+simple_digit(1,2):-!.
+simple_digit(N,N):-!.
+simple_digit(N,Y):-N mod Y =:= 0 -> fail,!;NewY is Y+1,simple_digit(N,NewY).
+
+sum_simple_del(N):-sum_simple_del(N,2,1),!.
+sum_simple_del(N,N,Sum):-(simple_digit(N) -> NewSum is N+Sum,write(NewSum);write(Sum)),!.
+sum_simple_del(N,Y,Sum):-(N mod Y =:= 0,simple_digit(Y) -> NewSum is Sum+Y,NewY is Y+1,sum_simple_del(N,NewSum,NewY);NewY is Y+1,sum_simple_del(N,Sum,NewY).
+
