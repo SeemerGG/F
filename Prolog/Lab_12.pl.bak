@@ -61,7 +61,7 @@ zad15(N):-read_list(List,N),shift_2(List,List2),write_list(List2).
 % Задание 16
 %Находит значение элемента который входит в список один раз
 solo_digit(List,X):-count_list(List,List_counts),solo_digit(X,List,List_counts),!.
-solo_digit(X,[X|_],[1|_]),!.
+solo_digit(X,[X|_],[1|_]):-!.
 solo_digit(X,[H|T],[HC|TC]):-solo_digit(X,T,TC).
 
 zad16(N):-read_list(List,N),solo_digit(List,X),write(X).
@@ -77,3 +77,21 @@ count_el(N,List,Count):-count_el(N,List,Count,0),!.
 count_el(_,[],Count,Count).
 count_el(N,[H|T],Count,TCount):-(N =:= H -> NewTCount is TCount+1,count_el(N,T,Count,NewTCount);count_el(N,T,Count,TCount)).
 
+% Задания 17
+
+% Находит минимальный элемент в списке
+min([H|T],X):-min(T,X,H),!.
+min([],X,X):-!.
+min([H|T],X,TMin):-H < TMin -> min(T,X,H);min(T,X,TMin).
+
+%Находит максимальный элемент в списке
+max([H|T],X):-max(T,X,H),!.
+max([],X,X):-!.
+max([H|T],X,TMax):-H > TMax -> max(T,X,H);max(T,X,TMax).
+
+%Меняет элементы со значениями Н и М местами в списке
+swap(N,M,List,X):-swap(N,M,List,[],X),!.
+swap(_,_,[],X,X):-!.
+swap(N,M,[H|T],NewList,X):-(H =:= N -> append(NewList,[M],NewNewList),swap(N,M,T,NewNewList,X);(H =:= M -> append(NewList,[N],NewNewList),swap(N,M,T,NewNewList,X);append(NewList,[H],NewNewList),swap(N,M,T,NewNewList,X))).
+
+zad17(N):-read_list(List,N),min(List,X),max(List,Y),swap(X,Y,List,NewList),write_list(NewList).
