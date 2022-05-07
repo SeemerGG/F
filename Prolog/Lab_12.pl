@@ -52,7 +52,7 @@ write_list([H|T]):-write(H),write(' '),write_list(T).
 getLast([], _, _):-!, fail.
 getLast([H], H, []):-!.
 getLast([H|T], R, [H|RL]):-getLast(T, R, RL).
-  
+
 shift(L,[E|RL]):-getLast(L,E,RL),!.
 shift_2(L,[E|RL]):-shift(L,R),shift(R,[E|RL]).
 
@@ -107,3 +107,11 @@ count_chet([],X,X):-!.
 count_chet([H|T],X,TCount):-(H mod 2 =:= 0 -> NewTCount is TCount+1,count_chet(T,X,NewTCount);count_chet(T,X,TCount)),!.
 
 zad19(N):-read_list(List,N),count_chet(List,X),write(X).
+
+%Задание 20
+
+list_el_belong(List,A,B,NewList):-list_el_belong(List,A,B,NewList,[]),!.
+list_el_belong([],_,_,NewList,NewList):-!.
+list_el_belong([H|T],A,B,NewList,TList):-(A =< H,B >= H -> append(TList,[H],NewTList),list_el_belong(T,A,B,NewList,NewTList);list_el_belong(T,A,B,NewList,TList)),!.
+
+zad20(N):-read_list(List,N),read(A),read(B),list_el_belong(List,A,B,NewList),write_list(NewList).
