@@ -99,3 +99,11 @@ zad17(N):-read_list(List,N),min(List,X),max(List,Y),swap(X,Y,List,NewList),write
 %Задание 18
 
 zad18(N):-read_list(List,N),shift(List, NewList),write_list(NewList).
+
+%Задание 19
+
+count_chet(List,X):-count_chet(List,X,0).
+count_chet([],X,X):-!.
+count_chet([H|T],X,TCount):-(H mod 2 =:= 0 -> NewTCount is TCount+1,count_chet(T,X,NewTCount);count_chet(T,X,TCount)),!.
+
+zad19(N):-read_list(List,N),count_chet(List,X),write(X).
