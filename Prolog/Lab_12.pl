@@ -33,5 +33,47 @@ srav(X,A,B,N,M):-(A<N,B<M -> (X2 is A**B,X =:= X2 -> fail,!;NewB is B+1,srav(X,A
 lenght_list([],0).
 lenght_list([_|T],X):-lenght_list(T,X1),X is X1+1.
 
+
+
+%
+append([],X,X).
+append([H|T],X,[H|T1]):-append(T,X,T1).
+
+read_list(A,N):-read_list([],A,0,N).
+read_list(A,A,N,N):-!.
+read_list(List,A,I,N):-	I1 is I+1,read(X),append(List,[X],List1),read_list(List1,A,I1,N).
+
+write_list([]):-!.
+write_list([H|T]):-write(H),write(' '),write_list(T).
+%
+
 %������� 15
+
+getLast([], _, _):-!, fail.
+getLast([H], H, []):-!.
+getLast([H|T], R, [H|RL]):-getLast(T, R, RL).
+  
+shift(L,[E|RL]):-getLast(L,E,RL),!.
+shift_2(L,[E|RL]):-shift(L,R),shift(R,[E|RL]).
+
+zad15(N):-read_list(List,N),shift_2(List,List2),write_list(List2).
+
+% Задание 16
+%Находит значение элемента который входит в список один раз
+solo_digit(List,X):-count_list(List,List_counts),solo_digit(X,List,List_counts),!.
+solo_digit(X,[X|_],[1|_]):-!.
+solo_digit(X,[H|T],[HC|TC]):-solo_digit(X,T,TC).
+
+zad16(N):-read_list(List,N),solo_digit(List,X),write(X).
+test(List):-count_list(List,List_counts),write_list(List_counts).
+
+%Формирует список вхождений
+count_list(List,List_counts):-count_list(List,List,List_counts,[]),!.
+count_list([],_,L,L):-!.
+count_list([H|T],List,List_counts,TList):-count_el(H,List,Count),append(TList,[Count],NewTList),count_list(T,List,List_counts,NewTList).
+
+%Количество вхождений элемента н в список
+count_el(N,List,Count):-count_el(N,List,Count,0),!.
+count_el(_,[],Count,Count).
+count_el(N,[H|T],Count,TCount):-(N =:= H -> NewTCount is TCount+1,count_el(N,T,Count,NewTCount);count_el(N,T,Count,TCount)).
 
