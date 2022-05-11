@@ -66,6 +66,35 @@ zad13(N):-read_list(List,N),count_sort(List,NewList),write_list(NewList).
 test(List):-list_count(List,Ans),write_list(Ans).
 
 %Задание 14
+in_list([],_):-fail.
+in_list([El|_],El).
+in_list([_|T],El):-in_list(T,El).
 
-in_list([El,_],El).
-in_list([_,T],E1):-in_list(T,El).
+zad14:- Hairs=[_,_,_],
+	in_list(Hairs,[belokurov,_]),
+	in_list(Hairs,[rizhov,_]),
+	in_list(Hairs,[chernov,_]),
+	in_list(Hairs,[_,blond]),
+	in_list(Hairs,[_,redhead]),
+	in_list(Hairs,[_,brunette]),
+	not(in_list(Hairs,[belokurov,blond])),
+	not(in_list(Hairs,[rizhov,redhead])),
+	not(in_list(Hairs,[chernov,brunette])),
+	write(Hairs),!.
+
+%Задание 15
+
+zad15:-Girls=[_,_,_],
+	in_list(Girls,[anna,Z,Z]),
+	in_list(Girls,[natalya,_,green]),
+	in_list(Girls,[valya,_,_]),
+	in_list(Girls,[_,white,_]),
+	in_list(Girls,[_,green,_]),
+	in_list(Girls,[_,blue,_]),
+	in_list(Girls,[_,_,white]),
+	in_list(Girls,[_,_,green]),
+	in_list(Girls,[_,_,blue]),
+	not(in_list(Girls,[valya,Y,Y])),
+	not(in_list(Girls,[natalya,X,X])),
+	not(in_list(Girls,[valya,white,white])),
+	write(Girls),!.
