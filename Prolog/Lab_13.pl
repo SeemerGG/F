@@ -146,6 +146,26 @@ near(A,B,T):-right(A,B,T).
 near(A,B,T):-left(A,B,T).
 
 
+% Задание 18
+
+zad18:-Men=[_,_,_,_],
+	in_list(Men,[voronov,_]),
+	in_list(Men,[pavlov,_]),
+	in_list(Men,[levitskiy,_]),
+	in_list(Men,[sahorov,_]),
+	in_list(Men,[_,dancer]),
+	in_list(Men,[_,artist]),
+	in_list(Men,[_,writer]),
+	in_list(Men,[_,singer]),
+	not(in_list(Men,[voronov,singer])),
+	not(in_list(Men,[levitskiy,singer])),
+	not(in_list(Men,[pavlov,writer])),
+	not(in_list(Men,[pavlov,artist])),
+	not(in_list(Men,[voronov,writer])),
+	not(in_list(Men,[sahorov,writer])),
+	write(Men),!.
+
+
 
 
 
