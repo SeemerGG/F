@@ -101,7 +101,7 @@ zad15:-Girls=[_,_,_],
 
 %Задание 16
 % профессия, имя, наличие сестёр, возвраст <0,1,2>, родственники
-zad16:-Friends=[_,_,_], 
+zad16:-Friends=[_,_,_],
 	in_list(Friends,[slesar,_,0,0,_]),
 	in_list(Friends,[tokar,_,_,1,_]),
 	in_list(Friends,[svarman,_,_,_,_]),
@@ -112,3 +112,44 @@ zad16:-Friends=[_,_,_],
 	in_list(Friends,[svarman,Who2,_,_,_]),
 	in_list(Friends,[tokar,Who3,_,_,_]),
 	write('slesar ='),write(Who1),nl,write('svarman ='),write(Who2),nl,write('tokar ='),write(Who3),!.
+
+%Задание 17
+
+zad17:-Drinks=[_,_,_,_],
+	in_list(Drinks,[bottle,_]),
+	in_list(Drinks,[glass,_]),
+	in_list(Drinks,[jug,_]),
+	in_list(Drinks,[pot,_]),
+	in_list(Drinks,[_,water]),
+	in_list(Drinks,[_,milk]),
+	in_list(Drinks,[_,lemonade]),
+	in_list(Drinks,[_,kvas]),
+	not(in_list(Drinks,[bottle,milk])),
+	not(in_list(Drinks,[bottle,water])),
+	not(in_list(Drinks,[pot,water])),
+	not(in_list(Drinks,[pot,lemonade])),
+	right([jug,_],[_,lemonade],Drinks),
+	right([_,lemonade],[_,kvas],Drinks),
+	near([glass,_],[pot,_],Drinks),
+	near([glass,_],[_,milk],Drinks),
+	write(Drinks),!.
+
+right(_,_,[]):-fail.
+right(A,B,[A|[B|_]]).
+right(A,B,[_|T]):-right(A,B,T).
+
+left(_,_,[]):-fail.
+left(A,B,[B,[[B|A]|_]]).
+left(A,B,[_|T]):-left(A,B,T).
+
+near(A,B,T):-right(A,B,T).
+near(A,B,T):-left(A,B,T).
+
+
+
+
+
+
+
+
+

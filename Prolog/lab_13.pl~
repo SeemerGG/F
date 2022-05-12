@@ -67,8 +67,8 @@ test(List):-list_count(List,Ans),write_list(Ans).
 
 %Задание 14
 in_list([],_):-fail.
-in_list([El,_],El).
-in_list([_,T],El):-in_list(T,El).
+in_list([El|_],El).
+in_list([_|T],El):-in_list(T,El).
 
 zad14:- Hairs=[_,_,_],
 	in_list(Hairs,[belokurov,_]),
@@ -81,3 +81,75 @@ zad14:- Hairs=[_,_,_],
 	not(in_list(Hairs,[rizhov,redhead])),
 	not(in_list(Hairs,[chernov,brunette])),
 	write(Hairs),!.
+
+%Задание 15
+
+zad15:-Girls=[_,_,_],
+	in_list(Girls,[anna,Z,Z]),
+	in_list(Girls,[natalya,_,green]),
+	in_list(Girls,[valya,_,_]),
+	in_list(Girls,[_,white,_]),
+	in_list(Girls,[_,green,_]),
+	in_list(Girls,[_,blue,_]),
+	in_list(Girls,[_,_,white]),
+	in_list(Girls,[_,_,green]),
+	in_list(Girls,[_,_,blue]),
+	not(in_list(Girls,[valya,Y,Y])),
+	not(in_list(Girls,[natalya,X,X])),
+	not(in_list(Girls,[valya,white,white])),
+	write(Girls),!.
+
+%Задание 16
+% профессия, имя, наличие сестёр, возвраст <0,1,2>, родственники
+zad16:-Friends=[_,_,_], 
+	in_list(Friends,[slesar,_,0,0,_]),
+	in_list(Friends,[tokar,_,_,1,_]),
+	in_list(Friends,[svarman,_,_,_,_]),
+	in_list(Friends,[_,semenov,_,2,borisov]),
+	in_list(Friends,[_,ivanov,_,_,_]),
+	in_list(Friends,[_,borisov,1,_,semenov]),
+	in_list(Friends,[slesar,Who1,_,_,_]),
+	in_list(Friends,[svarman,Who2,_,_,_]),
+	in_list(Friends,[tokar,Who3,_,_,_]),
+	write('slesar ='),write(Who1),nl,write('svarman ='),write(Who2),nl,write('tokar ='),write(Who3),!.
+	
+%Задание 17
+
+zad17:-Drinks=[_,_,_,_],
+	in_list(Drinks,[bottle,_]),
+	in_list(Drinks,[glass,_]),
+	in_list(Drinks,[jug,_]),
+	in_list(Drinks,[pot,_]),
+	in_list(Drinks,[_,water]),
+	in_list(Drinks,[_,milk]),
+	in_list(Drinks,[_,lemonade]),
+	in_list(Drinks,[_,kvas]),
+	not(in_list(Drinks,[bottle,milk]),
+	not(in_list(Drinks,[bottle,water]),
+	not(in_list(Drinks,[pot,water]),
+	not(in_list(Drinks,[pot,lemonade]),
+	left([_,lemonade],[jug,_],Drinks),
+	right([_,lemonade],[_,kvas],Drinks),
+	near([glass,_],[pot,_],Drinks),
+	near([glass,_],[_,milk],Drinks),
+	write(Drinks),!.
+	
+right(_,_,[]):-fail.
+right(A,B,[A|[B|_]).
+right(A,B,[_|T]):-right(A,B,T).	
+	
+left(_,_,[]):-fail.
+left(A,B,[B,[[B|A]|_]).
+left(A,B,[_|T):-left(A,B,T).
+
+near(A,B,T):-right(A,B,T).
+near(A,B,T):-left(A,B,T).
+
+
+
+
+
+
+
+
+
