@@ -98,3 +98,17 @@ zad15:-Girls=[_,_,_],
 	not(in_list(Girls,[natalya,X,X])),
 	not(in_list(Girls,[valya,white,white])),
 	write(Girls),!.
+
+%Задание 16
+% профессия, имя, наличие сестёр, возвраст <0,1,2>, родственники
+zad16:-Friends=[_,_,_], 
+	in_list(Friends,[slesar,_,0,0,_]),
+	in_list(Friends,[tokar,_,_,1,_]),
+	in_list(Friends,[svarman,_,_,_,_]),
+	in_list(Friends,[_,semenov,_,2,borisov]),
+	in_list(Friends,[_,ivanov,_,_,_]),
+	in_list(Friends,[_,borisov,1,_,semenov]),
+	in_list(Friends,[slesar,Who1,_,_,_]),
+	in_list(Friends,[svarman,Who2,_,_,_]),
+	in_list(Friends,[tokar,Who3,_,_,_]),
+	write('slesar ='),write(Who1),nl,write('svarman ='),write(Who2),nl,write('tokar ='),write(Who3),!.
