@@ -164,8 +164,33 @@ zad18:-Men=[_,_,_,_],
 	not(in_list(Men,[voronov,writer])),
 	not(in_list(Men,[sahorov,writer])),
 	write(Men),!.
+	
+% Задание 19 
 
-
+zad19:-Friends=[_,_,_],
+	in_list(Friends,[mikal,_,_,_]),
+	in_list(Friends,[samon,_,_,_]),
+	in_list(Friends,[richard,_,_,What]),
+	in_list(Friends,[_,1,_,_]),
+	in_list(Friends,[_,2,_,_]),
+	in_list(Friends,[_,3,_,_]),
+	in_list(Friends,[_,_,american,_]),
+	in_list(Friends,[_,_,israeli,_]),
+	in_list(Friends,[Who,_,australian,_]),
+	in_list(Friends,[_,_,_,kriket]),
+	in_list(Friends,[_,_,_,basketboll]),
+	in_list(Friends,[_,_,_,tenis]),
+	in_list(Friends,[mikal,_,_,basketboll]),
+	not(in_list(Friends,[mikal,_,american,_])),
+	in_list(Friends,[samon,_,israeli,_]),
+	not(in_list(Friends,[samon,_,_,tenis])),
+	in_list(Friends,[_,1,_,kriket]),
+	write('australian ='),write(Who),nl,write('richard ='),write(What),!.
+	
+	
+	
+	
+	
 
 
 
