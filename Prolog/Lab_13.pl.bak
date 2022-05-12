@@ -165,10 +165,99 @@ zad18:-Men=[_,_,_,_],
 	not(in_list(Men,[sahorov,writer])),
 	write(Men),!.
 
+% Задание 19
+
+zad19:-Friends=[_,_,_],
+	in_list(Friends,[mikal,_,_,_]),
+	in_list(Friends,[samon,_,_,_]),
+	in_list(Friends,[richard,_,_,What]),
+	in_list(Friends,[_,1,_,_]),
+	in_list(Friends,[_,2,_,_]),
+	in_list(Friends,[_,3,_,_]),
+	in_list(Friends,[_,_,american,_]),
+	in_list(Friends,[_,_,israeli,_]),
+	in_list(Friends,[Who,_,australian,_]),
+	in_list(Friends,[_,_,_,kriket]),
+	in_list(Friends,[_,_,_,basketboll]),
+	in_list(Friends,[_,_,_,tenis]),
+	in_list(Friends,[mikal,_,_,basketboll]),
+	not(in_list(Friends,[mikal,_,american,_])),
+	in_list(Friends,[samon,_,israeli,_]),
+	not(in_list(Friends,[samon,_,_,tenis])),
+	in_list(Friends,[_,1,_,kriket]),
+	write('australian ='),write(Who),nl,write('richard ='),write(What),!.
+
+% Задание 20
 
 
+	name("Tomas","James Tomas").
+    name("Tomas","Tomas Gerbert").
+    name("Gerbert","Tomas Gerbert").
+    name("Gerbert","Gerbert Frensis").
+    name("Frensis","Gerbert Frensis").
+    name("Frensis","Frensis James").
+    name("James","Frensis James").
+    name("James","James Tomas").
 
+    stronger(P1,P2,[P1|T]):-in_list(T,P2),!.
+    stronger(P1,P2,[_|T]):-stronger(P1,P2,T).
 
+    insert_evry_position(X, [X|T], T).
+    insert_evry_position(X, [H|T], [H|S]):-
+        insert_evry_position(X, T, S).
+
+    permutation([], []).
+    permutation([H|T], R):-
+        permutation(T, X), insert_evry_position(H, R, X).
+
+    solve:-
+        permutation(["James Tomas","Tomas Gerbert","Gerbert Frensis","Frensis James"],L),
+        name("Tomas",A0),
+        name("Gerbert",B0),
+        stronger(B0,A0,L),
+        name("Frensis",C0),
+        stronger(C0,B0,L),
+        name("Frensis",C1),
+        name("Tomas",A1),
+        name("Gerbert",B1),
+        stronger(A1,C1,L),
+        stronger(B1,C1,L),
+        name("Gerbert",B2),
+        name("James",D0),
+        stronger(D0,B2,L),
+        name("Frensis",C2),
+        stronger(B2,C2,L),
+		write(L),!.
+
+	zad20:-
+        L=[_,_,_,_],
+        in_list(L,[frensis,james]),
+        in_list(L,[james,tomas]),
+		in_list(L,[gerbert,frensis]),
+		in_list(L,[tomas,gerbert]),
+		
+		stronger([gerbert,frensis],[james,tomas],L);
+		stronger([tomas,gerbert],[james,tomas],L);
+		stronger([gerbert,frensis],[tomas,gerbert],L),
+		
+		stronger([frensis,james],[james,tomas],L);
+		stronger([frensis,james],[tomas,gerbert],L);
+		stronger([gerbert,frensis],[james,tomas],L);
+		stronger([gerbert,frensis],[tomas,gerbert],L),
+		
+		stronger([frensis,james],[gerbert,frensis],L);
+		stronger([frensis,james],[tomas,gerbert],L);
+		stronger([gerbert,frensis],[tomas,gerbert],L),
+		
+		stronger([james,tomas],[tomas,gerbert],L);
+		stronger([james,tomas],[gerbert,frensis],L);
+		stronger([frensis,james],[gerbert,frensis],L),
+		stronger([frensis,james],[tomas,gerbert],L),
+		
+		stronger([gerbert,frensis],[frensis,james],L);
+		stronger([tomas,gerbert],[frensis,james],L);
+		stronger([tomas,gerbert],[gerbert,frensis],L),
+		write(L),!.
 
 
 

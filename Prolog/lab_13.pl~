@@ -101,7 +101,7 @@ zad15:-Girls=[_,_,_],
 
 %Задание 16
 % профессия, имя, наличие сестёр, возвраст <0,1,2>, родственники
-zad16:-Friends=[_,_,_], 
+zad16:-Friends=[_,_,_],
 	in_list(Friends,[slesar,_,0,0,_]),
 	in_list(Friends,[tokar,_,_,1,_]),
 	in_list(Friends,[svarman,_,_,_,_]),
@@ -112,7 +112,7 @@ zad16:-Friends=[_,_,_],
 	in_list(Friends,[svarman,Who2,_,_,_]),
 	in_list(Friends,[tokar,Who3,_,_,_]),
 	write('slesar ='),write(Who1),nl,write('svarman ='),write(Who2),nl,write('tokar ='),write(Who3),!.
-	
+
 %Задание 17
 
 zad17:-Drinks=[_,_,_,_],
@@ -124,28 +124,131 @@ zad17:-Drinks=[_,_,_,_],
 	in_list(Drinks,[_,milk]),
 	in_list(Drinks,[_,lemonade]),
 	in_list(Drinks,[_,kvas]),
-	not(in_list(Drinks,[bottle,milk]),
-	not(in_list(Drinks,[bottle,water]),
-	not(in_list(Drinks,[pot,water]),
-	not(in_list(Drinks,[pot,lemonade]),
-	left([_,lemonade],[jug,_],Drinks),
+	not(in_list(Drinks,[bottle,milk])),
+	not(in_list(Drinks,[bottle,water])),
+	not(in_list(Drinks,[pot,water])),
+	not(in_list(Drinks,[pot,lemonade])),
+	right([jug,_],[_,lemonade],Drinks),
 	right([_,lemonade],[_,kvas],Drinks),
 	near([glass,_],[pot,_],Drinks),
 	near([glass,_],[_,milk],Drinks),
 	write(Drinks),!.
-	
+
 right(_,_,[]):-fail.
-right(A,B,[A|[B|_]).
-right(A,B,[_|T]):-right(A,B,T).	
-	
+right(A,B,[A|[B|_]]).
+right(A,B,[_|T]):-right(A,B,T).
+
 left(_,_,[]):-fail.
-left(A,B,[B,[[B|A]|_]).
-left(A,B,[_|T):-left(A,B,T).
+left(A,B,[B,[[B|A]|_]]).
+left(A,B,[_|T]):-left(A,B,T).
 
 near(A,B,T):-right(A,B,T).
 near(A,B,T):-left(A,B,T).
 
 
+% Задание 18
+
+zad18:-Men=[_,_,_,_],
+	in_list(Men,[voronov,_]),
+	in_list(Men,[pavlov,_]),
+	in_list(Men,[levitskiy,_]),
+	in_list(Men,[sahorov,_]),
+	in_list(Men,[_,dancer]),
+	in_list(Men,[_,artist]),
+	in_list(Men,[_,writer]),
+	in_list(Men,[_,singer]),
+	not(in_list(Men,[voronov,singer])),
+	not(in_list(Men,[levitskiy,singer])),
+	not(in_list(Men,[pavlov,writer])),
+	not(in_list(Men,[pavlov,artist])),
+	not(in_list(Men,[voronov,writer])),
+	not(in_list(Men,[sahorov,writer])),
+	write(Men),!.
+	
+% Задание 19 
+
+zad19:-Friends=[_,_,_],
+	in_list(Friends,[mikal,_,_,_]),
+	in_list(Friends,[samon,_,_,_]),
+	in_list(Friends,[richard,_,_,What]),
+	in_list(Friends,[_,1,_,_]),
+	in_list(Friends,[_,2,_,_]),
+	in_list(Friends,[_,3,_,_]),
+	in_list(Friends,[_,_,american,_]),
+	in_list(Friends,[_,_,israeli,_]),
+	in_list(Friends,[Who,_,australian,_]),
+	in_list(Friends,[_,_,_,kriket]),
+	in_list(Friends,[_,_,_,basketboll]),
+	in_list(Friends,[_,_,_,tenis]),
+	in_list(Friends,[mikal,_,_,basketboll]),
+	not(in_list(Friends,[mikal,_,american,_])),
+	in_list(Friends,[samon,_,israeli,_]),
+	not(in_list(Friends,[samon,_,_,tenis])),
+	in_list(Friends,[_,1,_,kriket]),
+	write('australian ='),write(Who),nl,write('richard ='),write(What),!.
+	
+% Задание 20
+
+
+  name("Tomas","James Tomas").
+    name("Tomas","Tomas Gerbert").
+    name("Gerbert","Tomas Gerbert").
+    name("Gerbert","Gerbert Frensis").
+    name("Frensis","Gerbert Frensis").
+    name("Frensis","Frensis James").
+    name("James","Frensis James").
+    name("James","James Tomas").
+    
+    stronger(P1,P2,[P1|T]):-in_list(T,P2),!.
+    stronger(P1,P2,[_|T]):-stronger(P1,P2,T).
+    
+    insert_evry_position(X, [X|T], T).
+    insert_evry_position(X, [H|T], [H|S]):-
+        insert_evry_position(X, T, S).
+ 
+    permutation([], []).
+    permutation([H|T], R):-
+        permutation(T, X), insert_evry_position(H, R, X).
+    
+    solve:-
+        permutation(["James Tomas","Tomas Gerbert","Gerbert Frensis","Frensis James"],L),
+        name("Tomas",A0),
+        name("Gerbert",B0),
+        stronger(B0,A0,L),
+        name("Frensis",C0),
+        stronger(C0,B0,L),
+        name("Frensis",C1),
+        name("Tomas",A1),
+        name("Gerbert",B1),
+        stronger(A1,C1,L),
+        stronger(B1,C1,L),
+        name("Gerbert",B2),
+        name("James",D0),
+        stronger(D0,B2,L),
+        name("Frensis",C2),
+        stronger(B2,C2,L).
+		write(L),!.
+	
+	
+zad20:-Boxers=[_,_,_,_],
+	name("Tomas",A0),
+	name("Gerbert",B0),
+	right(A0,B0,Boxers),
+	name("Frensis",C0),
+	right(B0,C0,Boxers),
+	name("Frensis",C1),
+	name("Tomas",A1),
+    name("Gerbert",B1),
+    right(A1,C1,Boxers),
+    right(B1,C1,Boxers),
+	name("Gerbert",B2),
+    name("James",D0),
+    right(D0,B2,Boxers),
+    name("Frensis",C2),
+    right(B2,C2,Boxers),
+	write(Boxers),!
+	
+	
 
 
 
