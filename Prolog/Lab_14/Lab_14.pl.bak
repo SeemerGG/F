@@ -138,3 +138,28 @@ all_words_in_one([H|T],AllWotds,TAll):-add_all_el(H,TAll,NewTAll),append(NewTAll
 add_all_el([],All,All):-!.
 add_all_el([H|T],TAll,NewTAll):-append(TAll,[H],NewAll),add_all_el(T,NewAll,NewTAll).
 
+zad2_5:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_5.txt'),read_list_str(List,_),seen,list_strs_in_list_words(List,NewList,[]),write(List),nl,write(NewList),nl,
+	vibor_non_clone_s(NewList,Strs),tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/answer2_5.txt'),write_list_str(Strs),told.
+
+
+vibor_non_clone_s(List,Strs):-vibor_non_clone_s(List,Strs,[]).
+vibor_non_clone_s([],S,S):-!.
+vibor_non_clone_s([H|T],Strs,TStrs):-proverka(H,T,T) -> append(TStrs,[H],NewTStrs),vibor_non_clone_s(T,Strs,NewTStrs);vibor_non_clone_s(T,Strs,NewTStrs).
+
+proverka([],_,_):-!.
+proverka([_,T],[],T1):-proverka(T,T1,T1).
+proverka([H|T],[H1|T1],OldList):-proverka_word(H,H1) -> proverka([H|T],T1,OldList);fail,!.
+
+proverka_word(_,[]):-!.
+proverka_word(H,[X|T]):-srav(H,X) -> fail,!;proverka_word(H,T).
+
+list_strs_in_list_words([],L,L):-!.
+list_strs_in_list_words([H|T],NewList,TList):-get_words(H,Words,_),append(TList,[Words],NewTList),list_strs_in_list_words(T,NewList,NewTList).
+
+% Задание 3
+
+zad3:-read_str(A,_),count_russians(A,C),write(C).
+
+count_russians(A,C):-count_russians(A,C,0).
+count_russians([],G,G):-!.
+count_russians([H|T],C,I):- H > 1039,H < 1104,I1 is I + 1,count_russians(T,C,I1),!;count_russians(T,C,I),!.

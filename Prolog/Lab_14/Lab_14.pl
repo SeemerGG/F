@@ -116,7 +116,7 @@ vibor_A([H|T],NewList,TList,Sred):-obhod_A(H,K,0),(K>Sred -> append(TList,[H],Ne
 
 
 sred_A_all(List,X):-count_str(List,K),count_A(List,Sum),X is Sum/K.
-
+%/
 count_str([],0).
 count_str([_|T],X):-count_str(T,X1),X is X1+1.
 
@@ -155,3 +155,12 @@ proverka_word(H,[X|T]):-srav(H,X) -> fail,!;proverka_word(H,T).
 
 list_strs_in_list_words([],L,L):-!.
 list_strs_in_list_words([H|T],NewList,TList):-get_words(H,Words,_),append(TList,[Words],NewTList),list_strs_in_list_words(T,NewList,NewTList).
+
+% Задание 3
+
+zad3:-read_str(A,_),count_russians(A,C),write(C).
+
+count_russians(A,C):-count_russians(A,C,0).
+count_russians([],G,G):-!.
+count_russians([H|T],C,I):- H > 1039,H < 1104,I1 is I + 1,count_russians(T,C,I1),!;count_russians(T,C,I),!.
+
