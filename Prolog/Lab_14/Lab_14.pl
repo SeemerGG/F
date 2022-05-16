@@ -162,5 +162,16 @@ zad3:-read_str(A,_),count_russians(A,C),write(C).
 
 count_russians(A,C):-count_russians(A,C,0).
 count_russians([],G,G):-!.
-count_russians([H|T],C,I):- H > 1039,H < 1104,I1 is I + 1,count_russians(T,C,I1),!;count_russians(T,C,I),!.
+count_russians([H|T],C,I):- (H > 1039,H < 1104 -> I1 is I + 1,count_russians(T,C,I1),!;count_russians(T,C,I),!).
 
+% Задание 4
+
+zad4:-read_str(A,_),only_small_latinica(A,NewA),flip_list(NewA,FlipA),srav(NewA,FlipA).
+
+only_small_latinica(A,NewA):-only_small_latinica(A,NewA,[]).
+only_small_latinica([],A,A):-!.
+only_small_latinica([H|T],NewA,TA):-(H>96,H<123 -> append(TA,[H],NewTA),only_small_latinica(T,NewA,NewTA);only_small_latinica(T,NewA,TA)).
+
+flip_list(A,NewA):-flip_list(A,NewA,[]).
+flip_list([],A,A):-!.
+flip_list([H|T],NewA,TA):-flip_list(T,NewA,[H|TA]).
