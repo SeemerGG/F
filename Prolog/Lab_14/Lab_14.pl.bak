@@ -1,0 +1,140 @@
+% «‡‰‡ÌËÂ 14
+
+read_str(S,N):-get0(X),r_str(S,N,0,[],X).
+r_str(S,N,N,S,10):-!.
+r_str(S,N,K,TS,X):-NewK is K + 1,append(TS,[X],NewTS),get0(NewX),r_str(S,N,NewK,NewTS,NewX).
+
+write_str([]):-!.
+write_str([H|T]):-put(H),write_str(T).
+
+write_list_str([]):-!.
+write_list_str([H|T]):-write_str(H),nl,write_list_str(T).
+
+zad1_1:-	read_str(A,N),write_str(A),write(', '),write_str(A),write(', '),
+		write_str(A),write(', '),write(N).
+
+count_words(A,K):-count_words(A,0,K).
+
+count_words([],K,K):-!.
+count_words(A,I,K):-skip_space(A,A1),get_word(A1,Word,A2),Word \=[],I1 is I+1,count_words(A2,I1,K),!.
+count_words(_,K,K).
+
+skip_space([32|T],A1):-skip_space(T,A1),!.
+skip_space(A1,A1).
+
+get_word([],[],[]):-!.
+get_word(A,Word,A2):-get_word(A,[],Word,A2).
+
+get_word([],Word,Word,[]).
+get_word([32|T],Word,Word,T):-!.
+get_word([H|T],W,Word,A2):-append(W,[H],W1),get_word(T,W1,Word,A2).
+
+get_words(A,Words,K):-get_words(A,[],Words,0,K).
+
+get_words([],B,B,K,K):-!.
+get_words(A,Temp_words,B,I,K):-
+	skip_space(A,A1),get_word(A1,Word,A2),Word \=[],
+	I1 is I+1,append(Temp_words,[Word],T_w),get_words(A2,T_w,B,I1,K),!.
+get_words(_,B,B,K,K).
+
+most_frequent_word(S,Word):-get_words(S,Words,_),delete_clone_words(Words,WordsWC),list_words_on_freq(WordsWC,Words,WordsWF),search_max_fre(WordsWF,Word).
+
+search_max_fre([[H,K]|T],Max):-search_max_fre(T,Max,H,K).
+search_max_fre([],Max,Max,_).
+search_max_fre([[H,K]|T],Max,TMax,TMaxK):-K > TMaxK -> search_max_fre(T,Max,H,K);search_max_fre(T,Max,TMax,TMaxK).
+
+list_words_on_freq(Words,OldWords,NewWords):-list_words_on_freq(Words,OldWords,NewWords,[]).
+list_words_on_freq([],_,NewWords,NewWords):-!.
+list_words_on_freq([H|T],OldWords,NewWords,TWords):-count_freq(H,OldWords,Count),append(TWords,[[H,Count]],NewTWords),list_words_on_freq(T,OldWords,NewWords,NewTWords).
+
+count_freq(H,Words,Count):-count_freq(H,Words,Count,0).
+count_freq(_,[],Count,Count):-!.
+count_freq(H,[X|T],Count,TCount):-srav(X,H) -> NewTCount is TCount+1,count_freq(H,T,Count,NewTCount);count_freq(H,T,Count,TCount).
+
+delete_clone_words([H|T],NewWords):-delete_clone_words(T,NewWords,[H]).
+delete_clone_words([],NewWords,NewWords):-!.
+delete_clone_words([H|T],NewWords,TNewWords):-obhod(H,TNewWords) -> delete_clone_words(T,NewWords,TNewWords);append(TNewWords,[H],NewTNewWords),delete_clone_words(T,NewWords,NewTNewWords).
+
+obhod(H,[H|T]):-!.
+obhod(H,[_|T]):-obhod(H,T).
+
+
+srav([],[]).
+srav([H|T],[H|Y]):-srav(T,Y).
+
+zad1_3:-read_str(S,_),most_frequent_word(S,Word),write_str(Word).
+
+zad1_4:-read_str([H|T],N),(N > 5 -> vivod3([H|T]);vivod(H,N)).
+
+vivod3([H1,H2,H3|T]):-write_str([H1,H2,H3]),vivod3_last([H1,H2,H3|T]).
+vivod3_last([_,H2,H3|T]):-vivod3_last([H2,H3|T]).
+vivod3_last([H1,H2,H3|[]]):-write_str([H1,H2,H3]),!.
+
+vivod(H,N):-vivod(H,N,0,[]).
+vivod(_,N,N,List):-write_str(List),!.
+vivod(H,N,I,List):-NewI is I+1,append(List,[H],NewList),vivod(H,N,NewI,NewList).
+
+zad1_5:-read_str(S,_),last_el(S,El),num_list(S,El,NewList,[],0),write(NewList).
+
+last_el([H],H):-!.
+last_el([_|T],El):-last_el(T,El).
+
+num_list([],_,List,List,_):-!.
+num_list([H|T],LastEl,NewList,TList,I):-NewI is I+1,(H =:= LastEl -> append(TList,[I],NewTList),num_list(T,LastEl,NewList,NewTList,NewI);num_list(T,LastEl,NewList,TList,NewI)).
+
+% «‡‰‡ÌËÂ 12
+
+read_str_f(A,N,Flag):-get0(X),r_str_f(X,A,[],N,0,Flag).
+r_str_f(-1,A,A,N,N,0):-!.
+r_str_f(10,A,A,N,N,1):-!.
+r_str_f(X,A,B,N,K,Flag):-K1 is K+1,append(B,[X],B1),get0(X1),r_str_f(X1,A,B1,N,K1,Flag).
+
+read_list_str(List,List_len):-read_str_f(A,N,Flag),r_l_s(List,List_len,[A],[N],Flag).
+r_l_s(List,List_len,List,List_len,0):-!.
+r_l_s(List,List_len,Cur_list,Cur_list_len,_):-
+	read_str_f(A,N,Flag),append(Cur_list,[A],C_l),append(Cur_list_len,[N],C_l_l),
+	r_l_s(List,List_len,C_l,C_l_l,Flag).
+
+zad2_1:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test.txt'),read_list_str(List,List_len),seen,srav_lens(List,List_len,Max),write_str(Max).
+
+srav_lens([H|T],[K|T2],Max):-srav_lens(T,T2,Max,H,K).
+srav_lens([],[],Max,Max,_):-!.
+srav_lens([H|T],[K|T2],Max,TMax,TK):-K > TK -> srav_lens(T,T2,Max,H,K);srav_lens(T,T2,Max,TMax,TK).
+
+zad2_2:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_2.txt'),read_list_str(List,_),seen,s_without_space(List,K,0),write(K).
+
+s_without_space([],K,K):-!.
+s_without_space([H|T],K,TK):-have_cpace(H) -> s_without_space(T,K,TK);NewTK is TK + 1,s_without_space(T,K,NewTK).
+
+have_cpace([32|_]):-!.
+have_cpace([_|T]):-have_cpace(T).
+
+zad2_3:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_3.txt'),read_list_str(List,_),sred_A_all(List,X),seen,vibor_A(List,NewList,[],X),write_list_str(NewList),!.
+
+vibor_A([],NewList,NewList,_):-!.
+vibor_A([H|T],NewList,TList,Sred):-obhod_A(H,K,0),(K>Sred -> append(TList,[H],NewTList),vibor_A(T,NewList,NewTList,Sred);vibor_A(T,NewList,TList,Sred)).
+
+
+sred_A_all(List,X):-count_str(List,K),count_A(List,Sum),X is Sum/K.
+
+count_str([],0).
+count_str([_|T],X):-count_str(T,X1),X is X1+1.
+
+count_A(List,Count):-count_A(List,Count,0).
+count_A([],Count,Count):-!.
+count_A([H|T],Count,TCount):-obhod_A(H,K,0),NewTCount is TCount+K,count_A(T,Count,NewTCount).
+
+obhod_A([],K,K):-!.
+obhod_A([97|T],K,TK):-NewTK is TK+1,obhod_A(T,K,NewTK).
+obhod_A([65|T],K,TK):-NewTK is TK+1,obhod_A(T,K,NewTK).
+obhod_A([_|T],K,TK):-obhod_A(T,K,TK).
+
+zad2_4:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_4.txt'),read_list_str(List,_),seen,all_words_in_one(List,AllWords,[]),most_frequent_word(AllWords,Word),write_str(Word).
+
+%‚—≈ —ÀŒ¬¿ ¬ ŒƒÕŒ… —“–Œ ≈
+all_words_in_one([],All,All):-!.
+all_words_in_one([H|T],AllWotds,TAll):-add_all_el(H,TAll,NewTAll),append(NewTAll,[32],NewNewTAll),all_words_in_one(T,AllWotds,NewNewTAll).
+
+add_all_el([],All,All):-!.
+add_all_el([H|T],TAll,NewTAll):-append(TAll,[H],NewAll),add_all_el(T,NewAll,NewTAll).
+
