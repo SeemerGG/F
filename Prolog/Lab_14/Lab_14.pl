@@ -175,3 +175,21 @@ only_small_latinica([H|T],NewA,TA):-(H>96,H<123 -> append(TA,[H],NewTA),only_sma
 flip_list(A,NewA):-flip_list(A,NewA,[]).
 flip_list([],A,A):-!.
 flip_list([H|T],NewA,TA):-flip_list(T,NewA,[H|TA]).
+
+% Задание 5
+
+zad5:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test5.txt'),read_list_str(List,_),all_words_in_one(List,A,[]),write(A),nl,seen,search_date(A,Daties),write_list_str(Daties).
+
+search_date(A,Daties):-search_date(A,Daties,[]).
+search_date([],Daties,Daties):-!.
+search_date([H2,H3,H4,H5,H6,H7,H8,H9,H10|[]],Daties,Daties):-!.
+search_date([H3,H4,H5,H6,H7,H8,H9,H10|[]],Daties,Daties):-!.
+search_date([H4,H5,H6,H7,H8,H9,H10|[]],Daties,Daties):-!.
+search_date([H5,H6,H7,H8,H9,H10|[]],Daties,Daties):-!.
+search_date([H6,H7,H8,H9,H10|[]],Daties,Daties):-!.
+search_date([H7,H8,H9,H10|[]],Daties,Daties):-!.
+search_date([H8,H9,H10|[]],Daties,Daties):-!.
+search_date([H9,H10|[]],Daties,Daties):-!.
+search_date([H10|[]],Daties,Daties):-!.
+search_date([H1,H2,H3,H4,H5,H6,H7,H8,H9,H10|T],Daties,TA):-(H1<50,H1>47,H3=:=46,H4>47,H4<52,H5>47,H5<58,H6=:=46,H7>47,H7<58,H8>47,H8<58,H9>47,H9<58,H10>47,H10<58 -> append(TA,[[H1,H2,H3,H4,H5,H6,H7,H8,H9,H10]],NewTA),
+search_date(T,Daties,NewTA);search_date([H2,H3,H4,H5,H6,H7,H8,H9,H10|T],Daties,TA)).
