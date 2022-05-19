@@ -193,3 +193,39 @@ search_date([H9,H10|[]],Daties,Daties):-!.
 search_date([H10|[]],Daties,Daties):-!.
 search_date([H1,H2,H3,H4,H5,H6,H7,H8,H9,H10|T],Daties,TA):-(H1<50,H1>47,H3=:=46,H4>47,H4<52,H5>47,H5<58,H6=:=46,H7>47,H7<58,H8>47,H8<58,H9>47,H9<58,H10>47,H10<58 -> append(TA,[[H1,H2,H3,H4,H5,H6,H7,H8,H9,H10]],NewTA),
 search_date(T,Daties,NewTA);search_date([H2,H3,H4,H5,H6,H7,H8,H9,H10|T],Daties,TA)).
+
+% Задание 6
+
+in_list([H|_],H).
+in_list([_|T],El):-in_list(T,El).
+
+in_list_ex([H|T],H,T).
+in_list_ex([H|T],El,[H|T1]):-in_list_ex(T,El,T1).
+%
+buil_razm_s_p(K):-read_str(List,_),razm_s_p(List,K,[]).
+
+razm_s_p(List,0,R):-write_str(R),nl,!,fail.
+razm_s_p(List,N,R):-NewN is N-1,in_list(List,E),razm_s_p(List,NewN,[E|R]).
+%
+build_perestanovki:-read_str(List,_),perestanovki(List,[]).
+perestanovki([],R1):-write_str(R1),nl,!,fail.
+perestanovki(List,R):-in_list_ex(List,E,T),perestanovki(T,[E|R]).
+%
+build_razm(K):-read_str(List,_),razm(List,K,[]).
+razm(List,0,R):-write_str(R),nl,!,fail.
+razm(List,N,R):-NewN is N-1,in_list_ex(List,E,T),razm(T,NewN,[E|R]).
+%
+build_sets:-read_str(A,_),all_pod(Set,A),write_str(Set),nl,fail.
+all_pod([],[]).
+all_pod([H|T1],[H|T2]):-all_pod(T1,T2).
+all_pod(T,[H2|T2]):-all_pod(T,T2).
+%
+build_soch(K):-read_str(A,_),soch(R,K,A),write_str(R),nl,fail.
+soch([],0,_):-!.
+soch([H|T],N,[H|T1]):-NewN is N-1,soch(T,NewN,T1).
+soch(T,N,[_|T1]):-soch(T,N,T1).
+% 
+build_soch_s_p(K):-read_str(A,_),soch_s_p(Soch,N,A),write_str(Soch),nl,fail.
+soch_s_p([],0,_):-!.
+soch_s_p([H|T],N,[H|T1]):-NewN is N-1,soch(T,NewN,[H|T1]).
+soch_s_p(T,N,[_|T1]):-soch_s_p(T,N,T1).
