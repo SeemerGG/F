@@ -245,4 +245,16 @@ aa([],2):-!.
 aa([],_):-fail,!.
 aa([H|T],K):- H=:=97-> NewK is K+1,aa(T,NewK);aa(T,K).
 
+%Задание 8
+
+zad8:-tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test8.txt'),fun8([97,98,99,100,101,102],5,[]),told,!.
+
+fun8(_,0,R):-(aa(R,0),without_povtor(R,R) -> write_str(R),nl,!,fail;!,fail).
+fun8(List,N,R):-NewN is N-1,in_list(List,E),fun8(List,NewN,[E|R]).
+
+count_el(_,[],TK,TK):-!.
+count_el(El,[H|T],K,TK):-El=:=H -> NewTK is TK+1,count_el(El,T,K,NewTK);count_el(El,T,K,TK).
+
+without_povtor([],_):-!.
+without_povtor([H|T],List):-count_el(H,List,K,0),(H=\=97,K>1 -> fail,!;without_povtor(T,List)).
 
