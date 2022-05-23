@@ -60,6 +60,8 @@ obhod(H,[_|T]):-obhod(H,T).
 
 
 srav([],[]).
+srav([],[_,_]):-fail,!.
+srav([_,_],[]):-fail,!.
 srav([H|T],[H|Y]):-srav(T,Y).
 
 zad1_3:-read_str(S,_),most_frequent_word(S,Word),write_str(Word).
@@ -138,8 +140,8 @@ all_words_in_one([H|T],AllWotds,TAll):-add_all_el(H,TAll,NewTAll),append(NewTAll
 add_all_el([],All,All):-!.
 add_all_el([H|T],TAll,NewTAll):-append(TAll,[H],NewAll),add_all_el(T,NewAll,NewTAll).
 
-zad2_5:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_5.txt'),read_list_str(List,_),seen,list_strs_in_list_words(List,NewList,[]),write(List),nl,write(NewList),nl,
-	vibor_non_clone_s(NewList,Strs),tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/answer2_5.txt'),write_list_str(Strs),told.
+zad2_5:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_5.txt'),read_list_str(List,_),seen,list_strs_in_list_words(List,NewList,[]),write(NewList),
+	vibor_non_clone_s(NewList,Strs),write(Strs),tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/answer2_5.txt'),write_list_str(Strs),told.
 
 
 vibor_non_clone_s(List,Strs):-vibor_non_clone_s(List,Strs,[]).
@@ -258,3 +260,14 @@ count_el(El,[H|T],K,TK):-El=:=H -> NewTK is TK+1,count_el(El,T,K,NewTK);count_el
 without_povtor([],_):-!.
 without_povtor([H|T],List):-count_el(H,List,K,0),(H=\=97,K>1 -> fail,!;without_povtor(T,List)).
 
+%Задание 9
+
+zad9:-tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test9.txt'),fun9([97,98,99,100,101,102],5,[]),told.
+
+fun9(_,0,R):-proverka_for_zad9(R,R)-> write_str(R),nl,!,fail;!,fail.
+fun9(List,N,R):-NewN is N-1,in_list(List,E),fun9(List,NewN,[E|R]).
+
+
+proverka_for_zad9([H|T],List):-count_el(H,List,K,0),(K > 2 -> fail,!;(K =:= 2 -> proverka_for_zad9(T,List,H);proverka_for_zad9(T,List))).
+proverka_for_zad9([],_,_):-!.
+proverka_for_zad9([H|T],List,El):-count_el(H,List,K,0),(H=\=El,K > 1 -> fail,!;proverka_for_zad9(T,List,El)).
