@@ -153,7 +153,7 @@ count_that_word(_,[],K,K):-!.
 count_that_word(E,[H|T],K,TK):-srav(E,H) -> NTK is TK+1,count_that_word(E,T,K,NTK);count_that_word(E,T,K,TK).
 
 proverka2_5([],F,F,_):-!.
-proverka2_5([H|T],F,TF,Words):-proverka(H,Words) -> append(TF,[1],NTF),proverka2_5(T,F,NTF,Words);proverka(T,F,TF,Words).
+proverka2_5([H|T],F,TF,Words):-proverka(H,Words) -> append(TF,[1],NTF),proverka2_5(T,F,NTF,Words);append(TF,[0],NTF),proverka2_5(T,F,NTF,Words).
 
 %Слово встречается не более одного раза
 proverka([],_):-!.

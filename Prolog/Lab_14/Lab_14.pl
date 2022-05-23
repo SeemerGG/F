@@ -142,9 +142,6 @@ add_all_el([H|T],TAll,NewTAll):-append(TAll,[H],NewAll),add_all_el(T,NewAll,NewT
 
 zad2_5:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_5.txt'),read_list_str(List,_),seen,list_strs_in_list_words(List,NewList,[]),union_list(NewList,NewNewList,[]),proverka2_5(NewList,F,[],NewNewList),tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/answer2_5.txt'),write2_5(List,F),told.
 
-in_list1([H|_],H):-!.
-in_list1([_|T],El):-in_list(T,El).
-
 union_list([],NewList,NewList):-!.
 union_list([[]|T2],NewList,TL):-union_list(T2,NewList,TL).
 union_list([[H|T1]|T2],List,TL):-append(TL,[H],NTL),union_list([T1|T2],List,NTL).
@@ -153,14 +150,14 @@ count_that_word(_,[],K,K):-!.
 count_that_word(E,[H|T],K,TK):-srav(E,H) -> NTK is TK+1,count_that_word(E,T,K,NTK);count_that_word(E,T,K,TK).
 
 proverka2_5([],F,F,_):-!.
-proverka2_5([H|T],F,TF,Words):-proverka(H,Words) -> append(TF,[1],NTF),proverka2_5(T,F,NTF,Words);proverka2_5(T,F,TF,Words).
+proverka2_5([H|T],F,TF,Words):-proverka(H,Words) -> append(TF,[1],NTF),proverka2_5(T,F,NTF,Words);append(TF,[0],NTF),proverka2_5(T,F,NTF,Words).
 
 %Слово встречается не более одного раза
 proverka([],_):-!.
 proverka([H|T],Words):-count_that_word(H,Words,K,0),(K>1 -> fail,!;proverka(T,Words)).
 
 write2_5([],[]):-!.
-write2_5([H|T],[F|TF]):- F=:=1 -> write_str(H),nl,write2_5(T,TF).
+write2_5([H|T],[F|TF]):- F=:=1 -> write_str(H),nl,write2_5(T,TF);write2_5(T,TF).
 
 list_strs_in_list_words([],L,L):-!.
 list_strs_in_list_words([H|T],NewList,TList):-get_words(H,Words,_),append(TList,[Words],NewTList),list_strs_in_list_words(T,NewList,NewTList).
