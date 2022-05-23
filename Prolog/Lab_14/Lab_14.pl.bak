@@ -140,7 +140,7 @@ all_words_in_one([H|T],AllWotds,TAll):-add_all_el(H,TAll,NewTAll),append(NewTAll
 add_all_el([],All,All):-!.
 add_all_el([H|T],TAll,NewTAll):-append(TAll,[H],NewAll),add_all_el(T,NewAll,NewTAll).
 
-zad2_5:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_5.txt'),read_list_str(List,_),seen,list_strs_in_list_words(List,NewList,[]),
+zad2_5:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_5.txt'),read_list_str(List,_),seen,list_strs_in_list_words(List,NewList,[]),write(NewList),
 	vibor_non_clone_s(NewList,Strs),write(Strs),tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/answer2_5.txt'),write_list_str(Strs),told.
 
 
@@ -157,6 +157,15 @@ proverka_word(H,[X|T]):-srav(H,X) -> fail,!;proverka_word(H,T).
 
 list_strs_in_list_words([],L,L):-!.
 list_strs_in_list_words([H|T],NewList,TList):-get_words(H,Words,_),append(TList,[Words],NewTList),list_strs_in_list_words(T,NewList,NewTList).
+
+zad2_5_2:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_4.txt'),read_list_str(List,_),seen,skip_space_list(List,NewList,[]),write(NewList).
+
+skip_space_list([],List,List):-!.
+skip_space_list([H|T],NewList,TL):-skip_spaces(H,NH,[]),append(TL,[NH],NTL),skip_space_list(T,NewList,NTL).
+
+skip_spaces([],List,List):-!.
+skip_spaces([32|T],List,TL):-skip_space(T,List,TL).
+skip_spaces([H|T],List,TL):-append(TL,[H],NTL).
 
 % Задание 3
 
@@ -271,3 +280,16 @@ fun9(List,N,R):-NewN is N-1,in_list(List,E),fun9(List,NewN,[E|R]).
 proverka_for_zad9([H|T],List):-count_el(H,List,K,0),(K > 2 -> fail,!;(K =:= 2 -> proverka_for_zad9(T,List,H);proverka_for_zad9(T,List))).
 proverka_for_zad9([],_,_):-!.
 proverka_for_zad9([H|T],List,El):-count_el(H,List,K,0),(H=\=El,K > 1 -> fail,!;proverka_for_zad9(T,List,El)).
+
+%Задание 10
+
+zad10:-tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test10.txt'),fun10([97,98,99,100,101,102],6,[]),told.
+
+fun10(_,0,R):-proverka_for_zad10(R,R)-> write_str(R),nl,!,fail;!,fail.
+fun10(List,N,R):-NewN is N-1,in_list(List,E),fun10(List,NewN,[E|R]).
+
+
+proverka_for_zad10([H|T],List):-count_el(H,List,K,0),(K > 2 -> fail,!;(K =:= 2 -> proverka_for_zad10(T,List,H);proverka_for_zad10(T,List))).
+proverka_for_zad10([H|T],List,El):-count_el(H,List,K,0),(H=\=El,K =:= 2 -> proverka_for_zad10(T,List,El,H);(H=\=El,K > 1 -> fail,!;proverka_for_zad10(T,List,El))).
+proverka_for_zad10([],_,_,_):-!.
+proverka_for_zad10([H|T],List,E1,E2):-count_el(H,List,K,0),(H=\=E1,H=\=E2,K > 1 -> fail,!;proverka_for_zad10(T,List,E1,E2)).

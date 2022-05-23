@@ -140,20 +140,27 @@ all_words_in_one([H|T],AllWotds,TAll):-add_all_el(H,TAll,NewTAll),append(NewTAll
 add_all_el([],All,All):-!.
 add_all_el([H|T],TAll,NewTAll):-append(TAll,[H],NewAll),add_all_el(T,NewAll,NewTAll).
 
-zad2_5:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_5.txt'),read_list_str(List,_),seen,list_strs_in_list_words(List,NewList,[]),write(NewList),
-	vibor_non_clone_s(NewList,Strs),write(Strs),tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/answer2_5.txt'),write_list_str(Strs),told.
+zad2_5:-see('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test2_5.txt'),read_list_str(List,_),seen,list_strs_in_list_words(List,NewList,[]),union_list(NewList,NewNewList,[]),proverka2_5(NewList,F,[],NewNewList),tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/answer2_5.txt'),write2_5(List,F),told.
 
+in_list1([H|_],H):-!.
+in_list1([_|T],El):-in_list(T,El).
 
-vibor_non_clone_s(List,Strs):-vibor_non_clone_s(List,Strs,[]).
-vibor_non_clone_s([],S,S):-!.
-vibor_non_clone_s([H|T],Strs,TStrs):-proverka(H,T,T) -> append(TStrs,[H],NewTStrs),vibor_non_clone_s(T,Strs,NewTStrs);vibor_non_clone_s(T,Strs,NewTStrs).
+union_list([],NewList,NewList):-!.
+union_list([[]|T2],NewList,TL):-union_list(T2,NewList,TL).
+union_list([[H|T1]|T2],List,TL):-append(TL,[H],NTL),union_list([T1|T2],List,NTL).
 
-proverka([],_,_):-!.
-proverka([_,T],[],T1):-proverka(T,T1,T1).
-proverka([H|T],[H1|T1],OldList):-proverka_word(H,H1) -> proverka([H|T],T1,OldList);fail,!.
+count_that_word(_,[],K,K):-!.
+count_that_word(E,[H|T],K,TK):-srav(E,H) -> NTK is TK+1,count_that_word(E,T,K,NTK);count_that_word(E,T,K,TK).
 
-proverka_word(_,[]):-!.
-proverka_word(H,[X|T]):-srav(H,X) -> fail,!;proverka_word(H,T).
+proverka2_5([],F,F,_):-!.
+proverka2_5([H|T],F,TF,Words):-proverka(H,Words) -> append(TF,[1],NTF),proverka2_5(T,F,NTF,Words);proverka2_5(T,F,TF,Words).
+
+%Слово встречается не более одного раза
+proverka([],_):-!.
+proverka([H|T],Words):-count_that_word(H,Words,K,0),(K>1 -> fail,!;proverka(T,Words)).
+
+write2_5([],[]):-!.
+write2_5([H|T],[F|TF]):- F=:=1 -> write_str(H),nl,write2_5(T,TF).
 
 list_strs_in_list_words([],L,L):-!.
 list_strs_in_list_words([H|T],NewList,TList):-get_words(H,Words,_),append(TList,[Words],NewTList),list_strs_in_list_words(T,NewList,NewTList).
@@ -271,3 +278,16 @@ fun9(List,N,R):-NewN is N-1,in_list(List,E),fun9(List,NewN,[E|R]).
 proverka_for_zad9([H|T],List):-count_el(H,List,K,0),(K > 2 -> fail,!;(K =:= 2 -> proverka_for_zad9(T,List,H);proverka_for_zad9(T,List))).
 proverka_for_zad9([],_,_):-!.
 proverka_for_zad9([H|T],List,El):-count_el(H,List,K,0),(H=\=El,K > 1 -> fail,!;proverka_for_zad9(T,List,El)).
+
+%Задание 10
+
+zad10:-tell('c:/Users/PcBoyarin/Desktop/FaLP_Lab/Prolog/Lab_14/test10.txt'),fun10([97,98,99,100,101,102],6,[]),told.
+
+fun10(_,0,R):-proverka_for_zad10(R,R)-> write_str(R),nl,!,fail;!,fail.
+fun10(List,N,R):-NewN is N-1,in_list(List,E),fun10(List,NewN,[E|R]).
+
+
+proverka_for_zad10([H|T],List):-count_el(H,List,K,0),(K > 2 -> fail,!;(K =:= 2 -> proverka_for_zad10(T,List,H);proverka_for_zad10(T,List))).
+proverka_for_zad10([H|T],List,El):-count_el(H,List,K,0),(H=\=El,K =:= 2 -> proverka_for_zad10(T,List,El,H);(H=\=El,K > 1 -> fail,!;proverka_for_zad10(T,List,El))).
+proverka_for_zad10([],_,_,_):-!.
+proverka_for_zad10([H|T],List,E1,E2):-count_el(H,List,K,0),(H=\=E1,H=\=E2,K > 1 -> fail,!;proverka_for_zad10(T,List,E1,E2)).
