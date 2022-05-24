@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Xri7zkJQG3Ko5f2YUVF8A6IWUKWiKd4ik0LuYhyrstih/JeyOBXsME6JQNU43EJ1snuhm0l4PLyf5Z2uI4aIgQ==",
+  "dgSpecHash": "iD4U9Xb3M0p7synsoLGhMLqAhO2po1rRQVIpe+9NpVJnPtvcAK/hSrFfhxwFXrB7zUYJX6N5mr+rCm77PyBceA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\DZ_LAB_7\\DZ_LAB_7\\DZ_LAB_7.fsproj",
+  "projectFilePath": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\F#\\DZ_LAB_7\\DZ_LAB_7_16\\DZ_LAB_7\\DZ_LAB_7.fsproj",
   "expectedPackageFiles": [
     "C:\\Users\\PcBoyarin\\.nuget\\packages\\fsharp.core\\6.0.2\\fsharp.core.6.0.2.nupkg.sha512",
     "C:\\Users\\PcBoyarin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.23\\microsoft.netcore.app.host.win-x64.3.1.23.nupkg.sha512",
