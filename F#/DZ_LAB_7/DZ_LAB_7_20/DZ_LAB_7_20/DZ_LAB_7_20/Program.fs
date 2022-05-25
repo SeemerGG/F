@@ -19,7 +19,12 @@ let zad1 (str:string) =
     let strs = str.Split(' ')
     Seq.sortBy(fun x -> count_cg_gc x) strs
 
-//p
+//В порядке увеличения квадратичного отклонения между наиболь-
+//шим ASCII-кодом символа строки и разницы в ASCII-кодах пар зеркально
+//расположенных символов строки (относительно ее середины)
+let max_Ascii str =
+    Seq.maxBy(fun x -> float x)
+let def_Ascii str =
 
 [<EntryPoint>]
 let main argv = 
