@@ -113,19 +113,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PcBoyarin\\.nuget\\packages\\": {}
+    "C:\\Users\\SeemerGG\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\F#\\DZ_LAB_7\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20.fsproj",
+      "projectUniqueName": "C:\\Users\\SeemerGG\\Documents\\GitHub\\F\\F#\\DZ_LAB_7\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20.fsproj",
       "projectName": "DZ_LAB_7_20",
-      "projectPath": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\F#\\DZ_LAB_7\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20.fsproj",
-      "packagesPath": "C:\\Users\\PcBoyarin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\F#\\DZ_LAB_7\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20\\obj\\",
+      "projectPath": "C:\\Users\\SeemerGG\\Documents\\GitHub\\F\\F#\\DZ_LAB_7\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20.fsproj",
+      "packagesPath": "C:\\Users\\SeemerGG\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\SeemerGG\\Documents\\GitHub\\F\\F#\\DZ_LAB_7\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\PcBoyarin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\SeemerGG\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -168,7 +168,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -12,12 +12,12 @@ snd y ='п' || snd y ='П' || snd y ='р' || snd y ='Р' || snd y ='с' || snd y
 && (snd x = 'б' || snd x ='Б' || snd x ='в' || snd x ='В' || snd x ='г' || snd x ='Г' || snd x ='д' || snd x ='Д' || snd x ='ж' || snd x ='Ж' || snd x ='з' || snd x ='З' || snd x ='й' || snd x ='Й' || snd x ='к' || snd x ='К' || snd x ='л' || snd x ='Л' || snd x ='м' || snd x ='М' ||snd x ='н' || snd x ='Н' || 
 snd x ='п' || snd x ='П' || snd x ='р' || snd x ='Р' || snd x ='с' || snd x ='С' || snd x ='т' || snd x ='Т' || snd x ='ф' || snd x ='Ф' || snd x ='х' || snd x ='Х' || snd x ='ц' || snd x ='Ц' || snd x ='ч' || snd x ='Ч' || snd x ='ш' || snd x ='Ш' || snd x ='щ' || snd x ='Щ'))) then s+1 else s) 0 str1 str2
 
-let print (str:seq<string>) = 
-    Seq.map(fun x -> printf "%s " x) str
+let print str = 
+    Array.map(fun x -> printf "%s " x) str
 
 let zad1 (str:string) =
     let strs = str.Split(' ')
-    Seq.sortBy(fun x -> count_cg_gc x) strs
+    Array.sortBy(fun x -> count_cg_gc x) strs
 
 //В порядке увеличения квадратичного отклонения между наиболь-
 //шим ASCII-кодом символа строки и разницы в ASCII-кодах пар зеркально
@@ -35,7 +35,7 @@ let def_Ascii str =
 
 let zad2 (str:string) = 
     let strs = str.Split(' ')
-    Seq.sortBy (fun x -> sqrt(float((max_Ascii x)*(def_Ascii x)))) strs
+    Seq.map(fun x -> printf "%s" x) (Seq.sortBy (fun x -> sqrt(float((max_Ascii x)*(def_Ascii x)))) strs)
 
 [<EntryPoint>]
 let main argv = 
@@ -44,5 +44,5 @@ let main argv =
     |"1" -> let str = Console.ReadLine()
             str |> zad1 |> print |> ignore
     |"2" -> let str = Console.ReadLine()
-            str |> zad2 |> print |> ignore          
+            str |> zad2 |> ignore
     0

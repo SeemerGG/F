@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "nR9kHg53L7QbXe9JqGnFEJusc7ZWSaUayUeBv2jgne3IU9+kU0Lc4iFp1ZiiFgLAlN7uYSIoJ417XNsAJyxj2w==",
+  "dgSpecHash": "GnfU175RbQR3r0+xzgsCpKEJuxkCwLhyq1kxItAcu2SmYEMUCwKFA3jWX4HHbmVCHHTPGxhyiekOU0wX3cQrKg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\F#\\DZ_LAB_7\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20.fsproj",
+  "projectFilePath": "C:\\Users\\SeemerGG\\Documents\\GitHub\\F\\F#\\DZ_LAB_7\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20\\DZ_LAB_7_20.fsproj",
   "expectedPackageFiles": [
-    "C:\\Users\\PcBoyarin\\.nuget\\packages\\fsharp.core\\6.0.2\\fsharp.core.6.0.2.nupkg.sha512"
+    "C:\\Users\\SeemerGG\\.nuget\\packages\\fsharp.core\\6.0.2\\fsharp.core.6.0.2.nupkg.sha512"
   ],
   "logs": []
 }
