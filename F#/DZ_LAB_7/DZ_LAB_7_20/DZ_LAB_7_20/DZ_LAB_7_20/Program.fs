@@ -23,8 +23,19 @@ let zad1 (str:string) =
 //шим ASCII-кодом символа строки и разницы в ASCII-кодах пар зеркально
 //расположенных символов строки (относительно ее середины)
 let max_Ascii str =
-    Seq.maxBy(fun x -> float x)
+    let new_str = Seq.map (fun x -> int x) str
+    Seq.max new_str
+
 let def_Ascii str =
+    let lenght = String.length(str)
+    let i_str = Seq.indexed str 
+    let str1 = Seq.filter(fun x -> fst x < lenght/2) i_str
+    let str2 = Seq.filter(fun x -> fst x > lenght/2) i_str
+    Seq.fold2 (fun s x y -> s+(int (snd x) - int (snd y))) 0 str1 str2 
+
+let zad2 (str:string) = 
+    let strs = str.Split(' ')
+    Seq.sortBy (fun x -> sqrt(float((max_Ascii x)*(def_Ascii x)))) strs
 
 [<EntryPoint>]
 let main argv = 
@@ -32,8 +43,6 @@ let main argv =
     match Console.ReadLine() with
     |"1" -> let str = Console.ReadLine()
             str |> zad1 |> print |> ignore
-
     |"2" -> let str = Console.ReadLine()
-            Console.WriteLine(count_cg_gc str)
-                  
+            str |> zad2 |> print |> ignore          
     0
