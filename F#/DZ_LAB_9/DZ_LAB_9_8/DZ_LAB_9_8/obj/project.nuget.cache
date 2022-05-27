@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "kOvTDLBGgPFeAObQgXUF4Uo4uF61EMTGYNhQeDGFtjeRGfYjUpl6FAKB2RUvwnKZOC0ZKckSwrIa90n7qwpugg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\PcBoyarin\\Desktop\\FaLP_Lab\\F#\\DZ_LAB_9\\DZ_LAB_9_8\\DZ_LAB_9_8\\DZ_LAB_9_8.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PcBoyarin\\.nuget\\packages\\fsharp.core\\6.0.2\\fsharp.core.6.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
