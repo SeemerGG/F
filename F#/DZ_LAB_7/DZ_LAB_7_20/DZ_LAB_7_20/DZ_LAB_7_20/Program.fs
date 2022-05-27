@@ -35,7 +35,7 @@ let def_Ascii str =
 
 let zad2 (str:string) = 
     let strs = str.Split(' ')
-    Seq.map(fun x -> printf "%s" x) (Seq.sortBy (fun x -> sqrt(float((max_Ascii x)*(def_Ascii x)))) strs)
+    Seq.toArray(Seq.sortBy (fun x -> sqrt(float((max_Ascii x)*(def_Ascii x)))) strs)
 
 [<EntryPoint>]
 let main argv = 
@@ -44,5 +44,5 @@ let main argv =
     |"1" -> let str = Console.ReadLine()
             str |> zad1 |> print |> ignore
     |"2" -> let str = Console.ReadLine()
-            str |> zad2 |> ignore
+            str |> zad2 |>  print |> ignore
     0
